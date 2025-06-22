@@ -299,16 +299,16 @@ Subscribes.forEach(Subscribe => {
     Subscribe.addEventListener("click", () => {
         if (Subscribe.classList.contains("active")) {
             Subscribe.classList.remove("active");
-            Subscribe.innerHTML = "اشتراك";
+            Subscribe.innerHTML = "Subscribe";
         } else {
             Subscribe.classList.add("active");
-            Subscribe.innerHTML = "تم الاشتراك";
+            Subscribe.innerHTML = "Subscribed";
         }
     });
 });
 
 for (let i = 0; i < Items.length; i++) {
-    Subscribes[i].style.right = `${ChannelTitles[i].offsetWidth + 40}px`;
+    Subscribes[i].style.left = `${ChannelTitles[i].offsetWidth + 40}px`;
 }
 
 // Handle Icons click
