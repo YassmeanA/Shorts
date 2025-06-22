@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/x-icon" href="Focus.svg">
     <title>Shorts</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -199,6 +199,9 @@ justify-content:start;
 gap:10px;
 overflow:auto;
 list-style:none;}
+
+.list1::-webkit-scrollbar, .list2::-webkit-scrollbar, .video-carousel::-webkit-scrollbar {
+display:none;}
 
 .list1 .item, .list2 .item {
 position:relative;
@@ -452,7 +455,7 @@ scroll-snap-stop:always;}
 
 .video-slide .Icons {
 position:absolute;
-right:10px;
+left:10px;
 bottom:100px;
 width:50px;
 height:290px;
@@ -510,7 +513,7 @@ display:flex;}
 
 .video-info {
 position:absolute;
-right:70px;
+left:70px;
 bottom:20px;
 width:calc(100% - 70px);
 display:flex;
@@ -528,7 +531,7 @@ justify-content:center;}
 
 .cover {
 position:absolute;
-right:10px;
+left:10px;
 bottom:15px;
 width:50px;
 height:50px;
@@ -541,7 +544,7 @@ justify-content:center;}
 
 .Music {
 position:relative;
-right:0;
+left:0;
 width:100%;
 overflow:hidden;
 display:flex;
@@ -550,11 +553,11 @@ justify-content:center;}
 
 .Music span {
 position:absolute;
-right:30px;
+left:30px;
 padding:10px;
 font-size:0.9rem;
 font-weight:400;
-text-align:right;
+text-align:left;
 white-space:nowrap;
 overflow:hidden;
 text-overflow:ellipsis;
@@ -565,7 +568,7 @@ text-shadow:2px 2px 5px rgba(0,0,0,0.5);}
 
 .Music .music {
 position:absolute;
-right:0;
+left:0;
 width:40px;
 height:40px;
 display:flex;
@@ -574,7 +577,7 @@ justify-content:center;}
 
 .Channel img {
 position:absolute;
-right:0;
+left:0;
 width:40px;
 height:40px;
 border-radius:50%;
@@ -586,7 +589,7 @@ box-shadow:2px 2px 5px rgba(0,0,0,0.2);}
 
 .Channel .channel-title {
 position:absolute;
-right:40px;
+left:40px;
 width:calc(100% - 125px);
 height:40px;
 overflow:hidden;
@@ -596,10 +599,10 @@ justify-content:center}
 
 .Channel span {
 position:absolute;
-right:0;
+left:0;
 font-size:0.9rem;
 font-weight:500;
-text-align:right;
+text-align:left;
 padding:10px;
 white-space:nowrap;
 overflow:hidden;
@@ -630,10 +633,10 @@ color:white;}
 
 .Title span {
 position:absolute;
-right:0;
+left:0;
 font-size:0.9rem;
 font-weight:400;
-text-align:right;
+text-align:left;
 padding:10px;
 white-space:nowrap;
 overflow:hidden;
@@ -660,7 +663,7 @@ box-shadow:0 2px 5px rgba(0,0,0,0.2);}
 
 .video-slide video {
 position:absolute;
-width:100%;
+width:auto;
 height:100%;
 object-fit:cover;}
 
