@@ -102,7 +102,7 @@ comment.className = "comment";
 
         CommentList.appendChild(comment);
         comment.querySelector(".settings").addEventListener("click",() => {
-comment.querySelector(".settings").style.background-="red";
+comment.querySelector(".settings").style.background="red";
 });
         
         const p = comment.querySelector("p");
