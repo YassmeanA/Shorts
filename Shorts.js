@@ -77,19 +77,6 @@ if(document.querySelectorAll(".list2 .item").length === 0){List2.querySelector("
 
 }
 
-function attachCommentSettingsEvents(setting) {
-
-        setting.addEventListener("click", () => {
-            setting.style.background = "red";
-            
-            setting.querySelector(".circle").classList.add("active");
-            setTimeout(() => {
-                setting.querySelector(".circle").classList.remove("active");
-            }, 300);
-        });
-    
-}
-
 
 function Comments(index) {
     const comments = videoData[index]; // Get the comment list for this video
@@ -114,8 +101,10 @@ comment.className = "comment";
         `;
 
         CommentList.appendChild(comment);
-        const setting = comment.querySelector(".settings"); // Make sure this matches your HTML
-        attachCommentSettingsEvents(setting)
+        comment.querySelector(".settings").addEventListener("click",() => {
+comment.querySelector(".settings").style.background-="red";
+});
+        
         const p = comment.querySelector("p");
         comment.style.height = `${p.offsetHeight + 50}px`;
     }
