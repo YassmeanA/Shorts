@@ -1,4 +1,5 @@
 
+
 const Body = document.querySelector(".Body");
 const VideoWrapper = document.querySelector(".video-wrapper");
 const VideoContainer = document.querySelector(".video-container");
@@ -30,10 +31,15 @@ const Options = document.querySelectorAll(".option");
 const Delete = document.querySelector(".delete");
 const sendFeedback = document.querySelector(".send-feedback");
 const report = document.querySelector(".report");
+const share = document.querySelector(".share");
+const save = document.querySelector(".save");
+const edit = document.querySelector(".edit");
+const remove = document.querySelector(".remove");
 const SendFeedback = document.querySelector(".SendFeedback");
 const Report = document.querySelector(".Report");
-const Back1 = document.querySelector(".SendFeedback .back");
-const Back2 = document.querySelector(".Report .back");
+const Share = document.querySelector(".Share");
+const Save = document.querySelector(".Save");
+const backs = document.querySelectorAll(".back");
 const CommentList = document.querySelector(".comments-list");
 const CommentSection = document.querySelector(".comments-section");
 const CommentIcons = document.querySelectorAll(".Icon.Comment");
@@ -77,6 +83,7 @@ if(document.querySelectorAll(".list2 .item").length === 0){List2.querySelector("
 
 }
 
+let y;
 
 function Comments(index) {
     const comments = videoData[index]; // Get the comment list for this video
@@ -88,6 +95,8 @@ function Comments(index) {
         const comment = document.createElement('li');
         
 comment.className = "comment";
+if(data.isNew){comment.classList.add("added");}
+
         comment.innerHTML = `
             <div class="settings">
                 <div class="circle"></div>
@@ -101,8 +110,29 @@ comment.className = "comment";
         `;
 
         CommentList.appendChild(comment);
-        comment.querySelector(".settings").addEventListener("click",() => {
-comment.querySelector(".settings").style.background="red";
+
+comment.querySelector(".settings").addEventListener("click",() => {
+
+y=i;
+
+comment.querySelector(".settings .circle").classList.add("active");
+setTimeout(() => {
+comment.querySelector(".settings .circle").classList.remove("active");
+Settings.classList.add("active");
+if(comment.classList.contains("added")){
+
+Settings.classList.add("C");
+Settings.classList.remove("A");
+Settings.classList.remove("B");
+
+}else{
+
+Settings.classList.add("B");
+Settings.classList.remove("A");
+Settings.classList.remove("C");};
+
+}, 400);
+
 });
         
         const p = comment.querySelector("p");
@@ -146,21 +176,17 @@ Input.addEventListener("input", () => {
 Enter.addEventListener("click", () => {
     if (comment && comment.trim() !== "" && currentVideoIndex !== null) {
         const newComment = {
-            avatar: Avatar.src, // Replace with user’s avatar if available
-            username: Pages[3].innerHTML,      // Replace with dynamic username
-            comment: comment.trim()
+            avatar: Avatar.src,
+            username: Pages[3].innerHTML,
+            comment: comment.trim(),
+            isNew: true //Flag new comment
         };
 
-        //Add to the current video's comment list
         videoData[currentVideoIndex].push(newComment);
-
-        //Refresh the comments UI
         Comments(currentVideoIndex);
 
-        //Update the counter (if needed)
         CommentIcons[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
 
-        // ClearInput
         Input.value = "";
         comment = "";
     }
@@ -179,8 +205,11 @@ setting.querySelector(".circle").classList.add("active");
 setTimeout(() => {
 setting.querySelector(".circle").classList.remove("active");
 Settings.classList.add("active");
+Settings.classList.add("A");
+Settings.classList.remove("B");
+Settings.classList.remove("C");
 Body.style.overflowY="hidden";
-}, 300);
+}, 500);
 
 });
 });
@@ -216,6 +245,28 @@ setTimeout(() => {
   }, 300);
 });
 
+remove.addEventListener("click", () => {
+    if (currentVideoIndex !== null && y !== undefined) {        
+        
+// Hide the settings panel
+remove.querySelector(".circle").classList.add("active");
+        
+setTimeout(() => {
+
+       // Remove the comment from the array
+        videoData[currentVideoIndex].splice(y, 1);
+
+        // Refresh the comment list UI
+        Comments(currentVideoIndex);
+
+        // Update the comment counter
+        CommentIcons[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
+
+remove.querySelector(".circle").classList.remove("active");
+Settings.classList.remove("active");},300);
+    }
+});
+
 
 sendFeedback.addEventListener("click", () => {
 
@@ -247,18 +298,46 @@ setTimeout(() => {Settings.classList.remove("active");},600);
 
 });
 
-Back1.addEventListener("click", () => {
+share.addEventListener("click", () => {
 
-SendFeedback.classList.remove("active");
-Body.style.overflowY="auto";
+share.querySelector(".circle").classList.add("active");
+
+setTimeout(() => {
+Share.classList.add("active");
+Body.style.overflowY="hidden";
+share.querySelector(".circle").classList.add("active");
+
+},300);
+
+setTimeout(() => {Settings.classList.remove("active");},600);
 
 });
 
-Back2.addEventListener("click", () => {
+save.addEventListener("click", () => {
 
+save.querySelector(".circle").classList.add("active");
+
+setTimeout(() => {
+Save.classList.add("active");
+Body.style.overflowY="hidden";
+save.querySelector(".circle").classList.add("active");
+
+},300);
+
+setTimeout(() => {Settings.classList.remove("active");},600);
+
+});
+
+backs.forEach(back => {
+back.addEventListener("click", () => {
+
+SendFeedback.classList.remove("active");
 Report.classList.remove("active");
+Share.classList.remove("active");
+Save.classList.remove("active");
 Body.style.overflowY="auto";
 
+});
 });
 
 
@@ -488,5 +567,4 @@ NumBs[i].innerHTML = countB;
 });
 
 }
-
 
