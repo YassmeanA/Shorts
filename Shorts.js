@@ -1112,6 +1112,11 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
   UploadCover.querySelector(".text4").style.display = "flex";
   ITEM.querySelector("img").src = "default-cover.svg";
 
+  videoInput.value = "";
+  audioInput.value = "";
+  imageInput.value = "";
+  coverInput.value = "";
+                    
   Finish.style.display = "none";
                     
   }, 1000);
