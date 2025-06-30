@@ -862,8 +862,6 @@ videoInput.addEventListener("change", () => {
 
     UploadVideo.querySelector(".video-info .channel-title span").innerHTML = document.querySelector(".YourChannel h3").innerHTML;
     UploadVideo.querySelector(".video-info .Channel img").src = document.querySelector(".Profile").src;
-    previewVideo.style.pointerEvents = "none";
-    setTimeout(() => {previewVideo.style.pointerEvents = "auto";},200);
     UploadVideo.querySelector(".UploadVideo .video-slide").style.display = "flex";
   }
 });
@@ -1019,10 +1017,6 @@ UploadCover.querySelector(".next").addEventListener("click", () => {
 });
 
 Finish.addEventListener("click", () => {
-  previewVideo.pause();
-  previewVideo.currentTime = 0;
-  previewAudio.pause();
-  previewAudio.currentTime = 0;
 
   const newIndex = videoData.length;
   const newVideoId = `${newIndex + 1}`;
@@ -1096,11 +1090,11 @@ slide.querySelector(".video-info").innerHTML += `
     
   Alert.innerHTML = "Video uploaded successfully";
   Alert.classList.add("active");
-  setTimeout(() => {UploadVideo.classList.remove("active");}, 1000);
-  setTimeout(() => { Alert.classList.remove("active");
+  UploadVideo.classList.remove("active");
+  setTimeout(() => { Alert.classList.remove("active");},1000);
  
 
-  // ✅ Reset all upload UIs
+  // Reset all upload UIs
   UploadVideo.querySelector(".video-slide").style.display = "none";
   UploadVideo.querySelector("video").src = "";
   UploadVideo.querySelector(".audio").src = "";
@@ -1132,5 +1126,4 @@ slide.querySelector(".video-info").innerHTML += `
 
   Finish.style.display = "none";
                     
-  }, 1400);
 });
