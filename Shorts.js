@@ -829,19 +829,20 @@ Add.addEventListener("click", () => {
 });
 
 UploadVideo.querySelector(".back").addEventListener("click", () => {
-  setTimeout(() => { UploadVideo.classList.remove("active"); }, 200);
+  setTimeout(() => {UploadVideo.classList.remove("active");}, 200);
 });
 
 Upload1.addEventListener("click", () => {
   Upload1.classList.add("active");
   videoInput.click();
+    setTimeout(() => {
+       Upload1.classList.remove("active");
+      UploadVideo.querySelector(".upload-section").style.display = "none";
+    UploadVideo.querySelector(".back").style.display = "none";},300);
 });
 
 videoInput.addEventListener("change", () => {
-  Upload1.classList.remove("active");
-  UploadVideo.querySelector(".upload-section").style.display = "none";
-  UploadVideo.querySelector(".back").style.display = "none";
-
+  
   const file = videoInput.files[0];
 
   if (file) {
@@ -927,13 +928,16 @@ Skip.addEventListener("click", () => {
 Upload2.addEventListener("click", () => {
   Upload2.classList.add("active");
   audioInput.click();
-});
-
-audioInput.addEventListener("change", () => {
+    setTimeout(() => {
   Upload2.classList.remove("active");
   UploadAudio.querySelector(".audio-container").style.display = "none";
   UploadAudio.querySelector(".cover-container").style.display = "flex";
   Skip.style.display = "none";
+    },300);
+});
+
+audioInput.addEventListener("change", () => {
+ 
 
   const file = audioInput.files[0];
   if (file) {
