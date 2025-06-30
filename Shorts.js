@@ -1078,7 +1078,7 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
     
   Alert.innerHTML = "Video uploaded successfully";
   Alert.classList.add("active");
-  setTimeout(() => {UploadVideo.classList.remove("active");}, 1200);
+  setTimeout(() => {UploadVideo.classList.remove("active");}, 1000);
   setTimeout(() => { Alert.classList.remove("active");
  
 
