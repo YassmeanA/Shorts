@@ -1072,11 +1072,20 @@ Finish.addEventListener("click", () => {
 <div class="channel-title"><span>${channelName}</span></div>
 </section>
 <section class="Title"><span>${uploadedTitle}</span></section>
-${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div class="music"><img src="music.svg"></div></section>` : ""}
 </div>
 <div class="TB"><img class="pause" src="pause.svg" style="display:none;"><img class="play" src="play.svg" style="display:flex;"></div>
 <svg class="spinner" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="20" stroke-width="8" stroke-linecap="round"/></svg>`;
 
+if(UploadVideo.querySelector(".video-info .Music")){
+        
+slide.querySelector(".video-info").innerHTML += `
+<section class="Music">
+<span>${musicTitleText}</span>
+<div class="music"><img src="music.svg"></div>
+</section>`;
+
+};
+    
   document.querySelector(".video-carousel").appendChild(slide);
   slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
 
@@ -1099,7 +1108,7 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
   UploadVideo.querySelector(".back").style.display = "flex";
   UploadVideo.querySelector(".Title span").innerHTML = "";
   UploadVideo.querySelector(".cover").src = "default.svg";
-  UploadVideo.querySelector(".video-info .Music").remove();
+  UploadVideo.querySelector(".video-info .Music")?.remove();
 
   UploadAudio.querySelector(".music-input").value = "";
   UploadAudio.querySelector(".video-input").value = "";
