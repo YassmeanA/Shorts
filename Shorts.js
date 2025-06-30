@@ -832,7 +832,6 @@ Add.addEventListener("click", () => {
   currentCover = "";
   musicTitle = "";
   videoTitle = "";
-  UploadVideo.querySelector(".video-info .Music")?.remove();
   setTimeout(() => { UploadVideo.classList.add("active"); }, 200);
 });
 
@@ -974,7 +973,6 @@ imageInput.addEventListener("change", () => {
 });
 
 UploadAudio.querySelector(".next").addEventListener("click", () => {
-  Skip.classList.remove("active");
 
   UploadVideo.querySelector(".cover").src = MusicCover.src;
   UploadVideo.querySelector(".Title span").innerHTML = videoTitle;
@@ -993,6 +991,7 @@ UploadAudio.querySelector(".next").addEventListener("click", () => {
       <span>${musicTitle}</span>
       <div class="music"><img src="music.svg"></div>
     </section>`;
+     Skip.classList.remove("active");
 });
 
 ITEM.addEventListener("click", () => {
@@ -1130,11 +1129,6 @@ slide.querySelector(".video-info").innerHTML += `
   UploadCover.querySelector(".text4").style.display = "flex";
   ITEM.querySelector("img").src = "default-cover.svg";
 
-  videoInput.value = "";
-  audioInput.value = "";
-  imageInput.value = "";
-  coverInput.value = "";
-                    
   Finish.style.display = "none";
                     
   }, 1400);
