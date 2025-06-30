@@ -1070,7 +1070,6 @@ Finish.addEventListener("click", () => {
 <section class="Channel">
 <img src="${channelImg}">
 <div class="channel-title"><span>${channelName}</span></div>
-<button class="Subscribe">Subscribe</button>
 </section>
 <section class="Title"><span>${uploadedTitle}</span></section>
 ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div class="music"><img src="music.svg"></div></section>` : ""}
