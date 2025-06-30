@@ -835,14 +835,15 @@ UploadVideo.querySelector(".back").addEventListener("click", () => {
 Upload1.addEventListener("click", () => {
   Upload1.classList.add("active");
   videoInput.click();
-    setTimeout(() => {
-       Upload1.classList.remove("active");
-      UploadVideo.querySelector(".upload-section").style.display = "none";
-    UploadVideo.querySelector(".back").style.display = "none";},300);
+
 });
 
 videoInput.addEventListener("change", () => {
-  
+
+    Upload1.classList.remove("active");
+    UploadVideo.querySelector(".upload-section").style.display = "none";
+    UploadVideo.querySelector(".back").style.display = "none";
+    
   const file = videoInput.files[0];
 
   if (file) {
@@ -928,16 +929,14 @@ Skip.addEventListener("click", () => {
 Upload2.addEventListener("click", () => {
   Upload2.classList.add("active");
   audioInput.click();
-    setTimeout(() => {
+});
+
+audioInput.addEventListener("change", () => {
+
   Upload2.classList.remove("active");
   UploadAudio.querySelector(".audio-container").style.display = "none";
   UploadAudio.querySelector(".cover-container").style.display = "flex";
   Skip.style.display = "none";
-    },300);
-});
-
-audioInput.addEventListener("change", () => {
- 
 
   const file = audioInput.files[0];
   if (file) {
@@ -1017,8 +1016,8 @@ Finish.addEventListener("click", () => {
 
   Alert.innerHTML = "Video uploaded successfully";
   Alert.classList.add("active");
-  setTimeout(() => { Alert.classList.remove("active"); }, 1000);
-  setTimeout(() => { UploadVideo.classList.remove("active"); }, 1000);
+  setTimeout(() => { Alert.classList.remove("active");UploadVideo.querySelector(".video-slide").style.display = "none";}, 1000);
+  setTimeout(() => {UploadVideo.classList.remove("active");}, 1200);
 
   const newIndex = videoData.length;
   const newVideoId = `${newIndex + 1}`;
@@ -1086,9 +1085,8 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
   UploadVideo.querySelector(".audio").src = "";
   UploadVideo.querySelector(".upload-section").style.display = "flex";
   UploadVideo.querySelector(".back").style.display = "flex";
-  UploadVideo.querySelector(".video-slide").style.display = "none";
   UploadVideo.querySelector(".Title span").innerHTML = "";
-  UploadVideo.querySelector(".cover").src = "";
+  UploadVideo.querySelector(".cover").src = "default.svg";
   UploadVideo.querySelector(".video-info .Music")?.remove();
 
   UploadAudio.querySelector(".music-input").value = "";
@@ -1098,9 +1096,9 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
   UploadAudio.querySelector(".cover-container").style.display = "none";
   UploadAudio.querySelector(".titleV-container").style.display = "none";
   UploadAudio.querySelector(".title-container").style.display = "none";
-  UploadAudio.querySelector(".circle1").style.display = "block";
-  UploadAudio.querySelector(".circle2").style.display = "block";
-  UploadAudio.querySelector(".text1").style.display = "block";
+  UploadAudio.querySelector(".circle1").style.display = "flex";
+  UploadAudio.querySelector(".circle2").style.display = "flex";
+  UploadAudio.querySelector(".text1").style.display = "flex";
   MusicCover.src = "default.svg";
   MusicCover.style.pointerEvents = "auto";
   Skip.style.display = "flex";
