@@ -832,7 +832,7 @@ Add.addEventListener("click", () => {
   currentCover = "";
   musicTitle = "";
   videoTitle = "";
-  UploadVideo.querySelector(".video-info .Music").remove();
+  UploadVideo.querySelector(".video-info .Music")?.remove();
   setTimeout(() => { UploadVideo.classList.add("active"); }, 200);
 });
 
