@@ -1119,5 +1119,5 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
                     
   Finish.style.display = "none";
                     
-  }, 1000);
+  }, 1400);
 });
