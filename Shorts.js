@@ -1073,7 +1073,7 @@ Finish.addEventListener("click", () => {
 <section class="Title"><span>${uploadedTitle}</span></section>
 </div>
 <div class="TB"><img class="pause" src="pause.svg" style="display:none;"><img class="play" src="play.svg" style="display:flex;"></div>
-<svg class="spinner" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="20" stroke-width="8" stroke-linecap="round"/></svg>`;
+<svg class="spinner" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="20" stroke-linecap="round"/></svg>`;
 
 if(UploadVideo.querySelector(".video-info .Music")){
         
