@@ -862,9 +862,9 @@ videoInput.addEventListener("change", () => {
 
     UploadVideo.querySelector(".video-info .channel-title span").innerHTML = document.querySelector(".YourChannel h3").innerHTML;
     UploadVideo.querySelector(".video-info .Channel img").src = document.querySelector(".Profile").src;
-    UploadVideo.querySelector(".video-slide").style.pointerEvents = "none";
+    previewVideo.style.pointerEvents = "none";
     setTimeout(() => {previewVideo.style.pointerEvents = "auto";},200);
-    previewVideo.style.display = "flex";
+    UploadVideo.querySelector(".UploadVideo .video-slide").style.display = "flex";
   }
 });
 
