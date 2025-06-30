@@ -1022,8 +1022,8 @@ Finish.addEventListener("click", () => {
 
   const uploadedCover = document.querySelector('.UploadCover img').src;
   const uploadedTitle = document.querySelector('.UploadVideo .Title span').innerHTML;
-  const uploadedVideo = document.querySelector('.UploadVideo video').querySelector("source").src;
-  const uploadedAudio = document.querySelector('.UploadVideo audio').querySelector("source").src;
+  const uploadedVideo = document.querySelector('.UploadVideo video').src;
+  const uploadedAudio = document.querySelector('.UploadVideo audio').src;
   const channelImg = document.querySelector('.UploadVideo .Channel img').src;
   const channelName = document.querySelector('.UploadVideo .channel-title span').innerHTML;
   const musicTitleText = document.querySelector('.UploadVideo .Music span')?.innerHTML || "";
@@ -1077,6 +1077,8 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
   load();
 
   // ✅ Reset all upload UIs
+  UploadVideo.querySelector("video").src = "";
+  UploadVideo.querySelector(".audio").src = "";
   UploadVideo.querySelector(".upload-section").style.display = "flex";
   UploadVideo.querySelector(".back").style.display = "flex";
   UploadVideo.querySelector(".video-slide").style.display = "none";
