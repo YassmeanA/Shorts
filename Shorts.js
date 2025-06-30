@@ -1071,7 +1071,7 @@ Finish.addEventListener("click", () => {
 ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div class="music"><img src="music.svg"></div></section>` : ""}
 </div>
 <div class="TB"><img class="pause" src="pause.svg" style="display:none;"><img class="play" src="play.svg" style="display:flex;"></div>
-<svg class="spinner" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="20" stroke-width="8" stroke-linecap="round"/></svg>`;
+<svg class="spinner" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="20" stroke-width="8" fill="none" stroke-linecap="round"/></svg>`;
 
   document.querySelector(".video-carousel").appendChild(slide);
   slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
