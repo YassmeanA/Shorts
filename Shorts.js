@@ -930,6 +930,7 @@ Upload2.addEventListener("click", () => {
 });
 
 audioInput.addEventListener("change", () => {
+  Upload2.classList.remove("active");
   UploadAudio.querySelector(".audio-container").style.display = "none";
   UploadAudio.querySelector(".cover-container").style.display = "flex";
   Skip.style.display = "none";
@@ -1096,14 +1097,15 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
   UploadAudio.querySelector(".circle1").style.display = "block";
   UploadAudio.querySelector(".circle2").style.display = "block";
   UploadAudio.querySelector(".text1").style.display = "block";
-  MusicCover.src = "";
+  MusicCover.src = "default.svg";
   MusicCover.style.pointerEvents = "auto";
   Skip.style.display = "flex";
 
   UploadCover.querySelector(".next").style.display = "none";
-  UploadCover.querySelector(".circle1").style.display = "block";
-  UploadCover.querySelector(".circle2").style.display = "block";
-  UploadCover.querySelector(".text4").style.display = "block";
+  UploadCover.querySelector(".circle1").style.display = "flex";
+  UploadCover.querySelector(".circle2").style.display = "flex";
+  UploadCover.querySelector(".text4").style.display = "flex";
+  ITEM.querySelector("img").src = "default-cover.svg";
 
   Finish.style.display = "none";
 });
