@@ -743,47 +743,47 @@ if (touchMoved) {
 });
 
 
-for (let i = 0; i < document.querySelectorAll(".item").length; i++) {
+document.querySelectorAll(".video-carousel .video-slide").forEach((Slide,index) => {
 
-document.querySelectorAll(".video-carousel .like")[i].addEventListener("click",() => {
+Slide.querySelector(".like").addEventListener("click",() => {
 
-countA = document.querySelectorAll(".video-carousel .numA")[i].innerHTML;
-countB = document.querySelectorAll(".video-carousel .numB")[i].innerHTML;
+countA = Slide.querySelector(".numA").innerHTML;
+countB = Slide.querySelector(".numB").innerHTML;
 
-if(document.querySelectorAll(".video-carousel .like-filled")[i].classList.contains("active")){
-document.querySelectorAll(".video-carousel .like-filled")[i].classList.remove("active");countA--;}
-else{document.querySelectorAll(".video-carousel .like-filled")[i].classList.add("active");countA++;
+if(Slide.querySelector(".like-filled").classList.contains("active")){
+Slide.querySelector(".like-filled").classList.remove("active");countA--;}
+else{Slide.querySelector(".like-filled").classList.add("active");countA++;
 
-if(document.querySelectorAll(".video-carousel .dislike-filled")[i].classList.contains("active")){
-document.querySelectorAll(".video-carousel .dislike-filled")[i].classList.remove("active");countB--;};
-
-};
-
-document.querySelectorAll(".video-carousel .numA")[i].innerHTML = countA;
-document.querySelectorAll(".video-carousel .numB")[i].innerHTML = countB;
-
-});
-
-document.querySelectorAll(".video-carousel .dislike")[i].addEventListener("click",() => {
-
-countA = document.querySelectorAll(".video-carousel .numA")[i].innerHTML;
-countB = document.querySelectorAll(".video-carousel .numB")[i].innerHTML;
-
-if(document.querySelectorAll(".video-carousel .dislike-filled")[i].classList.contains("active")){
-document.querySelectorAll(".video-carousel .dislike-filled")[i].classList.remove("active");countB--;}
-else{document.querySelectorAll(".video-carousel .dislike-filled")[i].classList.add("active");countB++;
-
-if(document.querySelectorAll(".video-carousel .like-filled")[i].classList.contains("active")){
-document.querySelectorAll(".video-carousel .like-filled")[i].classList.remove("active");countA--;};
+if(Slide.querySelector(".dislike-filled").classList.contains("active")){
+Slide.querySelector(".dislike-filled").classList.remove("active");countB--;};
 
 };
 
-document.querySelectorAll(".video-carousel .numA")[i].innerHTML = countA;
-document.querySelectorAll(".video-carousel .numB")[i].innerHTML = countB;
+Slide.querySelector(".numA").innerHTML = countA;
+Slide.querySelector(".numB").innerHTML = countB;
 
 });
 
-}
+Slide.querySelector(".dislike").addEventListener("click",() => {
+
+countA = Slide.querySelector(".numA").innerHTML;
+countB = Slide.querySelector(".numB").innerHTML;
+
+if(Slide.querySelector(".dislike-filled").classList.contains("active")){
+document.querySelector(".dislike-filled").classList.remove("active");countB--;}
+else{document.querySelector(".dislike-filled").classList.add("active");countB++;
+
+if(document.querySelector(".like-filled").classList.contains("active")){
+document.querySelector(".like-filled").classList.remove("active");countA--;};
+
+};
+
+document.querySelector(".numA").innerHTML = countA;
+document.querySelector(".numB").innerHTML = countB;
+
+});
+
+});
 
 
 for (let i = 0; i < videoData.length; i++) {
