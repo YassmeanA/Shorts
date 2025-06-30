@@ -1034,7 +1034,7 @@ Finish.addEventListener("click", () => {
   const uploadedAudio = document.querySelector('.UploadVideo audio').src;
   const channelImg = document.querySelector('.UploadVideo .Channel img').src;
   const channelName = document.querySelector('.UploadVideo .channel-title span').innerHTML;
-  const musicTitleText = document.querySelector('.UploadVideo .Music span').innerHTML;
+  const musicTitleText = document.querySelector('.UploadVideo .Music span')?.innerHTML || "";
 
   const item = document.createElement("li");
   item.className = "item";
