@@ -825,353 +825,283 @@ setTimeout(() => {
 
 
 Add.addEventListener("click", () => {
-setTimeout(() => {UploadVideo.classList.add("active");},200);});
+  setTimeout(() => { UploadVideo.classList.add("active"); }, 200);
+});
 
 UploadVideo.querySelector(".back").addEventListener("click", () => {
-setTimeout(() => {UploadVideo.classList.remove("active");},200);});
+  setTimeout(() => { UploadVideo.classList.remove("active"); }, 200);
+});
 
 Upload1.addEventListener("click", () => {
-Upload1.classList.add("active");
-videoInput.click();});
+  Upload1.classList.add("active");
+  videoInput.click();
+});
 
 videoInput.addEventListener("change", () => {
- 
-Upload1.classList.remove("active");
-UploadVideo.querySelector(".upload-section").style.display="none";
-UploadVideo.querySelector(".back").style.display="none";
+  Upload1.classList.remove("active");
+  UploadVideo.querySelector(".upload-section").style.display = "none";
+  UploadVideo.querySelector(".back").style.display = "none";
 
-const file = videoInput.files[0];
+  const file = videoInput.files[0];
 
-if (file) {
+  if (file) {
+    currentVideo = URL.createObjectURL(file);
+    previewVideo.src = currentVideo;
 
-currentVideo = URL.createObjectURL(file);
-previewVideo.src = currentVideo;
+    TBPlay.style.display = "flex";
+    Next.style.display = "flex";
 
-TBPlay.style.display="flex";
-Next.style.display="flex";
-
-UploadVideo.querySelector(".video-info .channel-title span").innerHTML = document.querySelector(".YourChannel h3").innerHTML;
-UploadVideo.querySelector(".video-info .Channel img").src = document.querySelector(".Profile").src;
-UploadVideo.querySelector(".video-slide").style.display="flex";
-
-}
-
+    UploadVideo.querySelector(".video-info .channel-title span").innerHTML = document.querySelector(".YourChannel h3").innerHTML;
+    UploadVideo.querySelector(".video-info .Channel img").src = document.querySelector(".Profile").src;
+    UploadVideo.querySelector(".video-slide").style.display = "flex";
+  }
 });
 
 previewVideo.addEventListener("click", () => {
-TBPlay.style.display="none";
+  TBPlay.style.display = "none";
 
-ToggleButton.classList.remove("active");
-void ToggleButton.offsetWidth;
-ToggleButton.classList.add("active");
+  ToggleButton.classList.remove("active");
+  void ToggleButton.offsetWidth;
+  ToggleButton.classList.add("active");
 
-if(previewVideo.paused){
+  if (previewVideo.paused) {
+    previewVideo.play();
+    previewAudio.play();
+    ToggleButton.querySelector(".TBplay").style.display = "none";
+    ToggleButton.querySelector(".TBpause").style.display = "flex";
+  } else {
+    previewVideo.pause();
+    previewAudio.pause();
+    ToggleButton.querySelector(".TBplay").style.display = "flex";
+    ToggleButton.querySelector(".TBpause").style.display = "none";
+  }
 
-previewVideo.play();
-previewAudio.play();
-ToggleButton.querySelector(".TBplay").style.display = "none";
-ToggleButton.querySelector(".TBpause").style.display = "flex";
-          
-}else{
-
-previewVideo.pause();
-previewAudio.pause();
-ToggleButton.querySelector(".TBplay").style.display = "flex";
-ToggleButton.querySelector(".TBpause").style.display = "none";
-          
-};
-
-if(previewVideo.ended){
-previewAudio.pause();
-previewAudio.currentTime = 0;}
-
+  if (previewVideo.ended) {
+    previewAudio.pause();
+    previewAudio.currentTime = 0;
+  }
 });
 
 Next.addEventListener("click", () => {
+  previewVideo.pause();
+  previewVideo.currentTime = 0;
+  previewAudio.pause();
+  previewAudio.currentTime = 0;
 
-previewVideo.pause();
-previewVideo.currentTime = 0;
-previewAudio.pause();
-previewAudio.currentTime = 0;
-
-UploadAudio.classList.add("active");
-
+  UploadAudio.classList.add("active");
 });
 
 let musicTitle = "";
 let videoTitle = "";
 
 function updateNextButtonVisibility() {
-
-if(Skip.classList.contains("active")) {
-
-if (videoTitle.trim() !== "") {
-    UploadAudio.querySelector(".next").style.display = "flex";
+  if (Skip.classList.contains("active")) {
+    UploadAudio.querySelector(".next").style.display = videoTitle.trim() !== "" ? "flex" : "none";
   } else {
-    UploadAudio.querySelector(".next").style.display = "none";
+    UploadAudio.querySelector(".next").style.display = (musicTitle.trim() !== "" && videoTitle.trim() !== "") ? "flex" : "none";
   }
-}
-
-else{
-
-if (musicTitle.trim() !== "" && videoTitle.trim() !== "") {
-    UploadAudio.querySelector(".next").style.display = "flex";
-  } else {
-    UploadAudio.querySelector(".next").style.display = "none";
-  }
-
-}
-
 }
 
 UploadAudio.querySelector(".music-input").addEventListener("input", () => {
-
-musicTitle = UploadAudio.querySelector(".music-input").value;
-updateNextButtonVisibility();
-
+  musicTitle = UploadAudio.querySelector(".music-input").value;
+  updateNextButtonVisibility();
 });
 
 UploadAudio.querySelector(".video-input").addEventListener("input", () => {
-
-videoTitle = UploadAudio.querySelector(".video-input").value;
-updateNextButtonVisibility();
-
+  videoTitle = UploadAudio.querySelector(".video-input").value;
+  updateNextButtonVisibility();
 });
 
 Skip.addEventListener("click", () => {
-Skip.classList.add("active")
-UploadAudio.querySelector(".audio-container").style.display="none";
-UploadAudio.querySelector(".cover-container").style.display="flex";
-UploadAudio.querySelector(".titleV-container").style.display="flex";
-UploadAudio.querySelector(".circle1").style.display="none";
-UploadAudio.querySelector(".circle2").style.display="none";
-UploadAudio.querySelector(".text1").style.display="none";
-MusicCover.style.pointerEvents="none";
-Skip.style.display="none";
+  Skip.classList.add("active");
+  UploadAudio.querySelector(".audio-container").style.display = "none";
+  UploadAudio.querySelector(".cover-container").style.display = "flex";
+  UploadAudio.querySelector(".titleV-container").style.display = "flex";
+  UploadAudio.querySelector(".circle1").style.display = "none";
+  UploadAudio.querySelector(".circle2").style.display = "none";
+  UploadAudio.querySelector(".text1").style.display = "none";
+  MusicCover.style.pointerEvents = "none";
+  Skip.style.display = "none";
 });
 
 Upload2.addEventListener("click", () => {
-Upload2.classList.add("active");
-audioInput.click();});
+  Upload2.classList.add("active");
+  audioInput.click();
+});
 
 audioInput.addEventListener("change", () => {
+  UploadAudio.querySelector(".audio-container").style.display = "none";
+  UploadAudio.querySelector(".cover-container").style.display = "flex";
+  Skip.style.display = "none";
 
-UploadAudio.querySelector(".audio-container").style.display="none";
-UploadAudio.querySelector(".cover-container").style.display="flex";
-Skip.style.display="none";
-
-const file = audioInput.files[0];
-
-if (file) {
-
-currentAudio = URL.createObjectURL(file);
-
-}
-
+  const file = audioInput.files[0];
+  if (file) {
+    currentAudio = URL.createObjectURL(file);
+  }
 });
 
 MusicCover.addEventListener("click", () => {
-imageInput.click();});
+  imageInput.click();
+});
 
 imageInput.addEventListener("change", () => {
+  const file = imageInput.files[0];
+  if (file) {
+    currentImage = URL.createObjectURL(file);
+    MusicCover.src = currentImage;
 
-const file = imageInput.files[0];
-
-if (file) {
-
-currentImage = URL.createObjectURL(file);
-MusicCover.src = currentImage;
-UploadAudio.querySelector(".title-container").style.display="flex";
-UploadAudio.querySelector(".titleV-container").style.display="flex";
-UploadAudio.querySelector(".circle1").style.display="none";
-UploadAudio.querySelector(".circle2").style.display="none";
-UploadAudio.querySelector(".text1").style.display="none";
-MusicCover.style.pointerEvents="none";
-
-}
-
+    UploadAudio.querySelector(".title-container").style.display = "flex";
+    UploadAudio.querySelector(".titleV-container").style.display = "flex";
+    UploadAudio.querySelector(".circle1").style.display = "none";
+    UploadAudio.querySelector(".circle2").style.display = "none";
+    UploadAudio.querySelector(".text1").style.display = "none";
+    MusicCover.style.pointerEvents = "none";
+  }
 });
 
 UploadAudio.querySelector(".next").addEventListener("click", () => {
-Skip.classList.remove("active")
-UploadVideo.querySelector(".cover").src=MusicCover.src;
-UploadVideo.querySelector(".Title span").innerHTML=videoTitle;
-ITEM.querySelector("span").innerHTML = videoTitle;
-TBPlay.style.display="flex";
+  Skip.classList.remove("active");
 
-UploadAudio.classList.remove("active");
-UploadCover.classList.add("active");
+  UploadVideo.querySelector(".cover").src = MusicCover.src;
+  UploadVideo.querySelector(".Title span").innerHTML = videoTitle;
+  ITEM.querySelector("span").innerHTML = videoTitle;
+  TBPlay.style.display = "flex";
 
-if (Skip.classList.contains("active")) return;
+  UploadAudio.classList.remove("active");
+  UploadCover.classList.add("active");
 
-UploadVideo.querySelector("audio").src=currentAudio;
-UploadVideo.querySelector(".video-info").innerHTML+=`
+  if (Skip.classList.contains("active")) return;
 
-<section class="Music">
-<span>${musicTitle}</span>
-<div class="music"><img src="music.svg"></div>
-</section>`;
+  UploadVideo.querySelector("audio").src = currentAudio;
 
+  UploadVideo.querySelector(".video-info").innerHTML += `
+    <section class="Music">
+      <span>${musicTitle}</span>
+      <div class="music"><img src="music.svg"></div>
+    </section>`;
 });
 
 ITEM.addEventListener("click", () => {
-coverInput.click();});
+  coverInput.click();
+});
 
 coverInput.addEventListener("change", () => {
+  const file = coverInput.files[0];
+  if (file) {
+    currentCover = URL.createObjectURL(file);
+    ITEM.querySelector("img").src = currentCover;
 
-const file = coverInput.files[0];
-
-if (file) {
-
-currentCover = URL.createObjectURL(file);
-ITEM.querySelector("img").src = currentCover;
-
-UploadCover.querySelector(".next").style.display="flex";
-
-UploadCover.querySelector(".circle1").style.display="none";
-UploadCover.querySelector(".circle2").style.display="none";
-UploadCover.querySelector(".text4").style.display="none";
-
-}
-
+    UploadCover.querySelector(".next").style.display = "flex";
+    UploadCover.querySelector(".circle1").style.display = "none";
+    UploadCover.querySelector(".circle2").style.display = "none";
+    UploadCover.querySelector(".text4").style.display = "none";
+  }
 });
 
 UploadCover.querySelector(".next").addEventListener("click", () => {
-Finish.style.display="flex";
-Next.style.display="none";
-
-UploadCover.classList.remove("active");
+  Finish.style.display = "flex";
+  Next.style.display = "none";
+  UploadCover.classList.remove("active");
 });
 
-
 Finish.addEventListener("click", () => {
+  previewVideo.pause();
+  previewVideo.currentTime = 0;
+  previewAudio.pause();
+  previewAudio.currentTime = 0;
 
-previewVideo.pause();
-previewVideo.currentTime = 0;
-previewAudio.pause();
-previewAudio.currentTime = 0;
+  Alert.innerHTML = "Video uploaded successfully";
+  Alert.classList.add("active");
+  setTimeout(() => { Alert.classList.remove("active"); }, 1000);
+  setTimeout(() => { UploadVideo.classList.remove("active"); }, 1000);
 
-Alert.innerHTML= "Video uploaded successfully";
-Alert.classList.add("active");
-setTimeout(() => {Alert.classList.remove("active");},1000);
-setTimeout(() => {UploadVideo.classList.remove("active");},1000);
-    
-    const newIndex = videoData.length; // get next index
-    const newVideoId = `${newIndex + 1}`; // generate new data-video like A9
+  const newIndex = videoData.length;
+  const newVideoId = `${newIndex + 1}`;
 
-    // 1. Add to videoData
-    videoData.push([]); // new empty comment array
+  videoData.push([]);
 
-    // 2. Create new item in list3
-    const item = document.createElement("li");
-    item.className = "item";
-    item.dataset.video = newVideoId;
-    item.innerHTML = `<img src="document.querySelector('.UploadCover img').src">
+  const uploadedCover = document.querySelector('.UploadCover img').src;
+  const uploadedTitle = document.querySelector('.UploadVideo .Title span').innerHTML;
+  const uploadedVideo = document.querySelector('.UploadVideo video').querySelector("source").src;
+  const uploadedAudio = document.querySelector('.UploadVideo audio').querySelector("source").src;
+  const channelImg = document.querySelector('.UploadVideo .Channel img').src;
+  const channelName = document.querySelector('.UploadVideo .channel-title span').innerHTML;
+  const musicTitleText = document.querySelector('.UploadVideo .Music span')?.innerHTML || "";
 
-<span>${document.querySelector('.UploadVideo .Title span').innerHTML}</span>
-
+  const item = document.createElement("li");
+  item.className = "item";
+  item.dataset.video = newVideoId;
+  item.innerHTML = `<img src="${uploadedCover}">
+<span>${uploadedTitle}</span>
 <div class="block"></div>
-
 <div class="settings">
 <div class="circle"></div>
 <img src="settings.svg">
 </div>`;
+  document.querySelector(".list3").appendChild(item);
 
-    document.querySelector(".list3").appendChild(item);
-
-    // 3. Create new video-slide
-    const slide = document.createElement("li");
-    slide.className = "video-slide";
-    slide.dataset.video = newVideoId;
-    slide.innerHTML = `
-
+  const slide = document.createElement("li");
+  slide.className = "video-slide";
+  slide.dataset.video = newVideoId;
+  slide.innerHTML = `
 <video preload="auto" class="video" poster="">
-<source src="${document.querySelector('.UploadVideo video').src}" type="video/mp4"/>
+<source src="${uploadedVideo}" type="video/mp4"/>
 </video>
-
 <audio preload="auto" class="audio">
-<source src="${document.querySelector('.UploadVideo audio').src}" type="audio/mp3"/>
+<source src="${uploadedAudio}" type="audio/mp3"/>
 </audio>
-
 <ul class="Icons">
-
-<li class="Icon">
-<div class="circle"></div>
-<img src="like.svg" class="like">
-<img src="likeFilled.svg" class="like-filled">
-<span class="numA">0</span>
-</li>
-
-<li class="Icon">
-<div class="circle"></div>
-<img src="dislike.svg" class="dislike">
-<img src="dislikeFilled.svg" class="dislike-filled">
-<span class="numB">0</span>
-</li>
-
-<li class="Icon Comment">
-<div class="circle"></div>
-<img src="comments.svg">
-<span>0</span>
-</li>
-
-<li class="Icon Share">
-<div class="circle"></div>
-<img src="share.svg">
-<span>0</span>
-</li>
-
+<li class="Icon"><div class="circle"></div><img src="like.svg" class="like"><img src="likeFilled.svg" class="like-filled"><span class="numA">0</span></li>
+<li class="Icon"><div class="circle"></div><img src="dislike.svg" class="dislike"><img src="dislikeFilled.svg" class="dislike-filled"><span class="numB">0</span></li>
+<li class="Icon Comment"><div class="circle"></div><img src="comments.svg"><span>0</span></li>
+<li class="Icon Share"><div class="circle"></div><img src="share.svg"><span>0</span></li>
 </ul>
-
-<img class="cover" src="${document.querySelector('.UploadVideo .cover').src}">
-
+<img class="cover" src="${uploadedCover}">
 <div class="video-info">
-
 <section class="Channel">
-<img src="${document.querySelector('.UploadVideo .Channel img').src}">
-<div class="channel-title">
-<span></span>
-</div>
-
+<img src="${channelImg}">
+<div class="channel-title"><span>${channelName}</span></div>
 <button class="Subscribe">Subscribe</button>
 </section>
-
-<section class="Title">
-<span>${document.querySelector('.UploadVideo .Title').innerHTML}</span>
-</section>
-
-
+<section class="Title"><span>${uploadedTitle}</span></section>
+${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div class="music"><img src="music.svg"></div></section>` : ""}
 </div>
+<div class="TB"><img class="pause" src="pause.svg" style="display:none;"><img class="play" src="play.svg" style="display:flex;"></div>
+<svg class="spinner" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="20" stroke-width="8" stroke-linecap="round"/></svg>`;
 
-<div class="TB">
+  document.querySelector(".video-carousel").appendChild(slide);
+  slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
 
-<img class="pause" src="pause.svg" style="display:none;">
-<img class="play" src="play.svg" style="display:flex;">
+  HeightOfPage();
+  empty();
+  load();
 
-</div>
+  // ✅ Reset all upload UIs
+  UploadVideo.querySelector(".upload-section").style.display = "flex";
+  UploadVideo.querySelector(".back").style.display = "flex";
+  UploadVideo.querySelector(".video-slide").style.display = "none";
+  UploadVideo.querySelector(".Title span").innerHTML = "";
+  UploadVideo.querySelector(".cover").src = "";
+  UploadVideo.querySelector(".video-info .Music")?.remove();
 
-<svg class="spinner" width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle cx="40" cy="40" r="20" stroke-width="8" stroke-linecap="round"/>
-</svg>
-`;
+  UploadAudio.querySelector(".music-input").value = "";
+  UploadAudio.querySelector(".video-input").value = "";
+  UploadAudio.querySelector(".next").style.display = "none";
+  UploadAudio.querySelector(".audio-container").style.display = "flex";
+  UploadAudio.querySelector(".cover-container").style.display = "none";
+  UploadAudio.querySelector(".titleV-container").style.display = "none";
+  UploadAudio.querySelector(".title-container").style.display = "none";
+  UploadAudio.querySelector(".circle1").style.display = "block";
+  UploadAudio.querySelector(".circle2").style.display = "block";
+  UploadAudio.querySelector(".text1").style.display = "block";
+  MusicCover.src = "";
+  MusicCover.style.pointerEvents = "auto";
+  Skip.style.display = "flex";
 
-if(document.querySelector(".UploadVideo .Music")) {
-slide.querySelector(".video-info").innerHTML += `<section class="Music">
-<span>${document.querySelector('.UploadVideo .Music span').innerHTML}</span>
-<div class="music"><img src="music.svg"></div>
-</section>`;}
+  UploadCover.querySelector(".next").style.display = "none";
+  UploadCover.querySelector(".circle1").style.display = "block";
+  UploadCover.querySelector(".circle2").style.display = "block";
+  UploadCover.querySelector(".text4").style.display = "block";
 
-    document.querySelector(".video-carousel").appendChild(slide);
-
-    // 4. Update global slides array
-    slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
-
-    // 5. Reapply styles, listeners and update
-    
-    HeightOfPage();
-    empty();
-    load();
-
+  Finish.style.display = "none";
 });
-
-
