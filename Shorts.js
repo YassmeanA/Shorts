@@ -442,7 +442,7 @@ setTimeout(() => {
      comment = currentComment.comment;
 
      // Remove the old comment temporarily
-     videoData[currentVideoIndex].splice(x, 1);
+     //videoData[currentVideoIndex].splice(x, 1);
 
      // Refresh comment list (removes the comment visually)
      Comments(currentVideoIndex);
