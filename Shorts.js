@@ -846,11 +846,9 @@ Upload1.addEventListener("click", () => {
 
 });
 
-let preventToggleAnimation = false;
 
 videoInput.addEventListener("change", () => {
-preventToggleAnimation = true; // prevent animation this time
-    
+
     Upload1.classList.remove("active");
     UploadVideo.querySelector(".upload-section").style.display = "none";
     UploadVideo.querySelector(".back").style.display = "none";
@@ -871,11 +869,6 @@ preventToggleAnimation = true; // prevent animation this time
 });
 
 previewVideo.addEventListener("click", () => {
- 
-    if (preventToggleAnimation) {
-    preventToggleAnimation = false;
-    return; // skip animation this time
-    }
     
   TBPlay.style.display = "none";
 
