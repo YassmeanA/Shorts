@@ -1028,7 +1028,7 @@ Finish.addEventListener("click", () => {
   const newVideoId = `${newIndex + 1}`;
 
   videoData.push([]);
-
+  const musicCover = document.querySelector('.UploadVideo .cover').src;
   const uploadedCover = document.querySelector('.UploadCover img').src;
   const uploadedTitle = document.querySelector('.UploadVideo .Title span').innerHTML;
   const uploadedVideo = document.querySelector('.UploadVideo video').src;
@@ -1065,7 +1065,7 @@ Finish.addEventListener("click", () => {
 <li class="Icon Comment"><div class="circle"></div><img src="comments.svg"><span>0</span></li>
 <li class="Icon Share"><div class="circle"></div><img src="share.svg"><span>0</span></li>
 </ul>
-<img class="cover" src="${uploadedCover}">
+<img class="cover" src="${musicCover}">
 <div class="video-info">
 <section class="Channel">
 <img src="${channelImg}">
