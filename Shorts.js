@@ -770,16 +770,16 @@ countA = Slide.querySelector(".numA").innerHTML;
 countB = Slide.querySelector(".numB").innerHTML;
 
 if(Slide.querySelector(".dislike-filled").classList.contains("active")){
-document.querySelector(".dislike-filled").classList.remove("active");countB--;}
-else{document.querySelector(".dislike-filled").classList.add("active");countB++;
+Slide.querySelector(".dislike-filled").classList.remove("active");countB--;}
+else{Slide.querySelector(".dislike-filled").classList.add("active");countB++;
 
-if(document.querySelector(".like-filled").classList.contains("active")){
-document.querySelector(".like-filled").classList.remove("active");countA--;};
+if(Slide.querySelector(".like-filled").classList.contains("active")){
+Slide.querySelector(".like-filled").classList.remove("active");countA--;};
 
 };
 
-document.querySelector(".numA").innerHTML = countA;
-document.querySelector(".numB").innerHTML = countB;
+Slide.querySelector(".numA").innerHTML = countA;
+Slide.querySelector(".numB").innerHTML = countB;
 
 });
 
