@@ -846,8 +846,11 @@ Upload1.addEventListener("click", () => {
 
 });
 
-videoInput.addEventListener("change", () => {
+let preventToggleAnimation = false;
 
+videoInput.addEventListener("change", () => {
+preventToggleAnimation = true; // prevent animation this time
+    
     Upload1.classList.remove("active");
     UploadVideo.querySelector(".upload-section").style.display = "none";
     UploadVideo.querySelector(".back").style.display = "none";
@@ -868,6 +871,12 @@ videoInput.addEventListener("change", () => {
 });
 
 previewVideo.addEventListener("click", () => {
+ 
+    if (preventToggleAnimation) {
+    preventToggleAnimation = false;
+    return; // skip animation this time
+    }
+    
   TBPlay.style.display = "none";
 
   ToggleButton.classList.remove("active");
@@ -1093,10 +1102,10 @@ slide.querySelector(".video-info").innerHTML += `
     
   Alert.innerHTML = "Video uploaded successfully";
   Alert.classList.add("active");
-  UploadVideo.classList.remove("active");
-  setTimeout(() => { Alert.classList.remove("active");},1000);
+  setTimeout(() => {UploadVideo.classList.remove("active");},300);
+  setTimeout(() => {Alert.classList.remove("active");},1000);
  
-
+  setTimeout(() => {
   // Reset all upload UIs
   UploadVideo.querySelector(".video-slide").style.display = "none";
   UploadVideo.querySelector("video").src = "";
@@ -1128,5 +1137,6 @@ slide.querySelector(".video-info").innerHTML += `
   ITEM.querySelector("img").src = "default-cover.svg";
 
   Finish.style.display = "none";
+  },600);
                     
 });
