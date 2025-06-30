@@ -991,11 +991,12 @@ UploadAudio.querySelector(".next").addEventListener("click", () => {
       <span>${musicTitle}</span>
       <div class="music"><img src="music.svg"></div>
     </section>`;
-     Skip.classList.remove("active");
 });
 
 ITEM.addEventListener("click", () => {
+  coverInput.value = "";
   coverInput.click();
+  Skip.classList.remove("active");
 });
 
 coverInput.addEventListener("change", () => {
