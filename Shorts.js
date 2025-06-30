@@ -1097,7 +1097,7 @@ ${musicTitleText ? `<section class="Music"><span>${musicTitleText}</span><div cl
   UploadVideo.querySelector(".back").style.display = "flex";
   UploadVideo.querySelector(".Title span").innerHTML = "";
   UploadVideo.querySelector(".cover").src = "default.svg";
-  UploadVideo.querySelector(".video-info .Music")?.remove();
+  UploadVideo.querySelector(".video-info .Music").remove();
 
   UploadAudio.querySelector(".music-input").value = "";
   UploadAudio.querySelector(".video-input").value = "";
