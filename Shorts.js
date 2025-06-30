@@ -929,6 +929,7 @@ Skip.addEventListener("click", () => {
   UploadAudio.querySelector(".circle1").style.display = "none";
   UploadAudio.querySelector(".circle2").style.display = "none";
   UploadAudio.querySelector(".text1").style.display = "none";
+  MusicCover.src = "default.svg";
   MusicCover.style.pointerEvents = "none";
   Skip.style.display = "none";
 });
