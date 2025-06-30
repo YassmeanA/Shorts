@@ -932,7 +932,6 @@ Skip.addEventListener("click", () => {
   UploadAudio.querySelector(".circle1").style.display = "none";
   UploadAudio.querySelector(".circle2").style.display = "none";
   UploadAudio.querySelector(".text1").style.display = "none";
-  MusicCover.src = "default.svg";
   MusicCover.style.pointerEvents = "none";
   Skip.style.display = "none";
 });
@@ -1036,7 +1035,7 @@ Finish.addEventListener("click", () => {
   const uploadedAudio = document.querySelector('.UploadVideo audio').src;
   const channelImg = document.querySelector('.UploadVideo .Channel img').src;
   const channelName = document.querySelector('.UploadVideo .channel-title span').innerHTML;
-  const musicTitleText = document.querySelector('.UploadVideo .Music span')?.innerHTML || "";
+  const musicTitleText = document.querySelector('.UploadVideo .Music span').innerHTML;
 
   const item = document.createElement("li");
   item.className = "item";
