@@ -841,6 +841,7 @@ UploadVideo.querySelector(".back").addEventListener("click", () => {
 
 Upload1.addEventListener("click", () => {
   Upload1.classList.add("active");
+  videoInput.value = "";
   videoInput.click();
 
 });
@@ -935,6 +936,7 @@ Skip.addEventListener("click", () => {
 
 Upload2.addEventListener("click", () => {
   Upload2.classList.add("active");
+  audioInput.value = "";
   audioInput.click();
 });
 
@@ -952,6 +954,7 @@ audioInput.addEventListener("change", () => {
 });
 
 MusicCover.addEventListener("click", () => {
+  imageInput.value = "";
   imageInput.click();
 });
 
