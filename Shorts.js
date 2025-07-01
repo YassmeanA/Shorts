@@ -866,7 +866,7 @@ videoInput.addEventListener("change", () => {
     UploadVideo.querySelector(".video-info .Channel img").src = document.querySelector(".Profile").src;
     UploadVideo.querySelector(".UploadVideo .video-slide").style.display = "flex";
     document.querySelector(".ToggleButton.active").style.animation="none";
-    setTimeout(() => {document.querySelector(".ToggleButton.active").style.animation="Show 1s";},100);
+    setTimeout(() => {document.querySelector(".ToggleButton.active").style.animation="Show 1s";},5000);
   }
 });
 
