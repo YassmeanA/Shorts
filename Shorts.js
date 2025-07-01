@@ -1096,6 +1096,43 @@ Slide.querySelector(".video-info").innerHTML += `
   empty();
   
 
+Slide.querySelector(".like").addEventListener("click",() => {
+
+countA = Slide.querySelector(".numA").innerHTML;
+countB = Slide.querySelector(".numB").innerHTML;
+
+if(Slide.querySelector(".like-filled").classList.contains("active")){
+Slide.querySelector(".like-filled").classList.remove("active");countA--;}
+else{Slide.querySelector(".like-filled").classList.add("active");countA++;
+
+if(Slide.querySelector(".dislike-filled").classList.contains("active")){
+Slide.querySelector(".dislike-filled").classList.remove("active");countB--;};
+
+};
+
+Slide.querySelector(".numA").innerHTML = countA;
+Slide.querySelector(".numB").innerHTML = countB;
+
+});
+
+Slide.querySelector(".dislike").addEventListener("click",() => {
+
+countA = Slide.querySelector(".numA").innerHTML;
+countB = Slide.querySelector(".numB").innerHTML;
+
+if(Slide.querySelector(".dislike-filled").classList.contains("active")){
+Slide.querySelector(".dislike-filled").classList.remove("active");countB--;}
+else{Slide.querySelector(".dislike-filled").classList.add("active");countB++;
+
+if(Slide.querySelector(".like-filled").classList.contains("active")){
+Slide.querySelector(".like-filled").classList.remove("active");countA--;};
+
+};
+
+Slide.querySelector(".numA").innerHTML = countA;
+Slide.querySelector(".numB").innerHTML = countB;
+
+});
     
   Alert.innerHTML = "Video uploaded successfully";
   Alert.classList.add("active");
