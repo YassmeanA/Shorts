@@ -366,8 +366,8 @@ setTimeout(() => {
 Alert.classList.remove("active");
 },1500);
 
-if(ShareIcon.classList.contains("shared")) return;
-ShareIcon.querySelector("span").innerHTML += 1;
+//if(ShareIcon.classList.contains("shared")) return;
+//ShareIcon.querySelector("span").innerHTML += 1;
 ShareIcon.classList.add("shared");
     
 });
