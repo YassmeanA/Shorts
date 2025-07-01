@@ -1050,10 +1050,10 @@ Finish.addEventListener("click", () => {
 </div>`;
   document.querySelector(".list3").appendChild(item);
 
-  const slide = document.createElement("li");
-  slide.className = "video-slide";
-  slide.dataset.video = newVideoId;
-  slide.innerHTML = `
+  const Slide = document.createElement("li");
+  Slide.className = "video-slide";
+  Slide.dataset.video = newVideoId;
+  Slide.innerHTML = `
 <video preload="auto" class="video" poster="">
 <source src="${uploadedVideo}" type="video/mp4"/>
 </video>
@@ -1080,7 +1080,7 @@ Finish.addEventListener("click", () => {
 
 if(UploadVideo.querySelector(".video-info .Music")){
         
-slide.querySelector(".video-info").innerHTML += `
+Slide.querySelector(".video-info").innerHTML += `
 <section class="Music">
 <span>${musicTitleText}</span>
 <div class="music"><img src="music.svg"></div>
@@ -1088,7 +1088,7 @@ slide.querySelector(".video-info").innerHTML += `
 
 };
     
-  document.querySelector(".video-carousel").appendChild(slide);
+  document.querySelector(".video-carousel").appendChild(Slide);
   slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
 
   load();
