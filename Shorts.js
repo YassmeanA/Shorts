@@ -366,6 +366,10 @@ setTimeout(() => {
 Alert.classList.remove("active");
 },1500);
 
+if(ShareIcon.classList.contains("shared")) return;
+ShareIcon.queryselector("span").innerHTML += 1;
+ShareIcon.classList.add("shared");
+    
 });
 });
 
