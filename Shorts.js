@@ -487,7 +487,7 @@ setTimeout(() => {
 
 
 // Handle Subscribe buttons
-document.querySelectorAll(".video-carousel .video-slide .Subscribe").forEach((Subscribe,index) => {
+document.querySelectorAll(".video-carousel .Subscribe").forEach((Subscribe,index) => {
     Subscribe.addEventListener("click", () => {
         if (Subscribe.classList.contains("active")) {
             Subscribe.classList.remove("active");
@@ -743,7 +743,7 @@ if (touchMoved) {
 });
 
 
-document.querySelectorAll(".video-carousel .video-slide").forEach((Slide,index) => {
+document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {
 
 Slide.querySelector(".like").addEventListener("click",() => {
 
@@ -1091,9 +1091,10 @@ slide.querySelector(".video-info").innerHTML += `
   document.querySelector(".video-carousel").appendChild(slide);
   slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
 
+  load();
   HeightOfPage();
   empty();
-  load();
+  
 
     
   Alert.innerHTML = "Video uploaded successfully";
