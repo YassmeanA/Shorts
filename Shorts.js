@@ -864,7 +864,9 @@ videoInput.addEventListener("change", () => {
 
     UploadVideo.querySelector(".video-info .channel-title span").innerHTML = document.querySelector(".YourChannel h3").innerHTML;
     UploadVideo.querySelector(".video-info .Channel img").src = document.querySelector(".Profile").src;
-    setTimeout(() => {UploadVideo.querySelector(".UploadVideo .video-slide").style.display = "flex";},500);
+    UploadVideo.querySelector(".UploadVideo .video-slide").style.opacity = "1";
+    UploadVideo.querySelector(".UploadVideo .video-slide").style.pointerEvents = "auto";
+      
    }
 });
 
@@ -1100,7 +1102,8 @@ slide.querySelector(".video-info").innerHTML += `
  
   setTimeout(() => {
   // Reset all upload UIs
-  UploadVideo.querySelector(".video-slide").style.display = "none";
+  UploadVideo.querySelector(".UploadVideo .video-slide").style.opacity = "0";
+  UploadVideo.querySelector(".UploadVideo .video-slide").style.pointerEvents = "none";
   UploadVideo.querySelector("video").src = "";
   UploadVideo.querySelector(".audio").src = "";
   UploadVideo.querySelector(".upload-section").style.display = "flex";
