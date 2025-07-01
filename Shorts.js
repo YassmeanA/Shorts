@@ -1092,7 +1092,8 @@ Slide.querySelector(".video-info").innerHTML += `
     
   document.querySelector(".video-carousel").appendChild(Slide);
   slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
-
+  countA = 0;
+  countB = 0;
   load();
   HeightOfPage();
   empty();
