@@ -487,7 +487,7 @@ setTimeout(() => {
 
 
 // Handle Subscribe buttons
-document.querySelectorAll(".video-carousel .video-slide.S .Subscribe").forEach(Subscribe => {
+document.querySelectorAll(".video-carousel .video-slide .Subscribe").forEach(Subscribe => {
     Subscribe.addEventListener("click", () => {
         if (Subscribe.classList.contains("active")) {
             Subscribe.classList.remove("active");
@@ -1039,7 +1039,7 @@ Finish.addEventListener("click", () => {
   const musicTitleText = document.querySelector('.UploadVideo .Music span')?.innerHTML || "";
 
   const item = document.createElement("li");
-  item.className = "item";
+  item.className = "item new";
   item.dataset.video = newVideoId;
   item.innerHTML = `<img src="${uploadedCover}">
 <span>${uploadedTitle}</span>
@@ -1071,6 +1071,7 @@ Finish.addEventListener("click", () => {
 <section class="Channel">
 <img src="${channelImg}">
 <div class="channel-title"><span>${channelName}</span></div>
+<button class="Subscribe">Subscribe</button>
 </section>
 <section class="Title"><span>${uploadedTitle}</span></section>
 </div>
