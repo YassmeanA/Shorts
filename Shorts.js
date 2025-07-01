@@ -743,7 +743,7 @@ if (touchMoved) {
 });
 
 
-document.querySelectorAll(".video-carousel .video-slide.S").forEach((Slide,index) => {
+document.querySelectorAll(".video-carousel .video-slide").forEach((Slide,index) => {
 
 Slide.querySelector(".like").addEventListener("click",() => {
 
