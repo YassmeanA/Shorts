@@ -864,10 +864,8 @@ videoInput.addEventListener("change", () => {
 
     UploadVideo.querySelector(".video-info .channel-title span").innerHTML = document.querySelector(".YourChannel h3").innerHTML;
     UploadVideo.querySelector(".video-info .Channel img").src = document.querySelector(".Profile").src;
-    UploadVideo.querySelector(".UploadVideo .video-slide").style.display = "flex";
-    document.querySelector(".ToggleButton.active").style.animation="none";
-    setTimeout(() => {document.querySelector(".ToggleButton.active").style.animation="Show 1s";},5000);
-  }
+    setTimeout(() => {UploadVideo.querySelector(".UploadVideo .video-slide").style.display = "flex";},500);
+   }
 });
 
 previewVideo.addEventListener("click", () => {
