@@ -638,7 +638,7 @@ setTimeout(() => {
 document.addEventListener("keydown", (e) => {
 
 
-if (VideoWrapper.classList.contains("Comments") || Body.classList.contains("touch")) return;
+if (!VideoWrapper.classList.contains("active") || VideoWrapper.classList.contains("Comments") || Body.classList.contains("touch")) return;
 
 let index = Math.round(carousel.scrollTop / document.querySelectorAll(".video-slide")[0].offsetHeight);
 
