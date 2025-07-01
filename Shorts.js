@@ -503,6 +503,49 @@ document.querySelectorAll(".video-carousel .Subscribe").forEach((Subscribe,index
 });
 
 
+
+document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {
+
+Slide.querySelector(".like").addEventListener("click",() => {
+
+countA = Slide.querySelector(".numA").innerHTML;
+countB = Slide.querySelector(".numB").innerHTML;
+
+if(Slide.querySelector(".like-filled").classList.contains("active")){
+Slide.querySelector(".like-filled").classList.remove("active");countA--;}
+else{Slide.querySelector(".like-filled").classList.add("active");countA++;
+
+if(Slide.querySelector(".dislike-filled").classList.contains("active")){
+Slide.querySelector(".dislike-filled").classList.remove("active");countB--;};
+
+};
+
+Slide.querySelector(".numA").innerHTML = countA;
+Slide.querySelector(".numB").innerHTML = countB;
+
+});
+
+Slide.querySelector(".dislike").addEventListener("click",() => {
+
+countA = Slide.querySelector(".numA").innerHTML;
+countB = Slide.querySelector(".numB").innerHTML;
+
+if(Slide.querySelector(".dislike-filled").classList.contains("active")){
+Slide.querySelector(".dislike-filled").classList.remove("active");countB--;}
+else{Slide.querySelector(".dislike-filled").classList.add("active");countB++;
+
+if(Slide.querySelector(".like-filled").classList.contains("active")){
+Slide.querySelector(".like-filled").classList.remove("active");countA--;};
+
+};
+
+Slide.querySelector(".numA").innerHTML = countA;
+Slide.querySelector(".numB").innerHTML = countB;
+
+});
+
+});
+
 // Handle Icons click
 document.querySelectorAll(".video-carousel .Icons .Icon").forEach((Icon, index) => {
     Icon.addEventListener("click", () => {
@@ -740,49 +783,6 @@ if (touchMoved) {
        
         }, 100);
     }
-});
-
-
-document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {
-
-Slide.querySelector(".like").addEventListener("click",() => {
-
-countA = Slide.querySelector(".numA").innerHTML;
-countB = Slide.querySelector(".numB").innerHTML;
-
-if(Slide.querySelector(".like-filled").classList.contains("active")){
-Slide.querySelector(".like-filled").classList.remove("active");countA--;}
-else{Slide.querySelector(".like-filled").classList.add("active");countA++;
-
-if(Slide.querySelector(".dislike-filled").classList.contains("active")){
-Slide.querySelector(".dislike-filled").classList.remove("active");countB--;};
-
-};
-
-Slide.querySelector(".numA").innerHTML = countA;
-Slide.querySelector(".numB").innerHTML = countB;
-
-});
-
-Slide.querySelector(".dislike").addEventListener("click",() => {
-
-countA = Slide.querySelector(".numA").innerHTML;
-countB = Slide.querySelector(".numB").innerHTML;
-
-if(Slide.querySelector(".dislike-filled").classList.contains("active")){
-Slide.querySelector(".dislike-filled").classList.remove("active");countB--;}
-else{Slide.querySelector(".dislike-filled").classList.add("active");countB++;
-
-if(Slide.querySelector(".like-filled").classList.contains("active")){
-Slide.querySelector(".like-filled").classList.remove("active");countA--;};
-
-};
-
-Slide.querySelector(".numA").innerHTML = countA;
-Slide.querySelector(".numB").innerHTML = countB;
-
-});
-
 });
 
 
