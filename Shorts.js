@@ -487,7 +487,7 @@ setTimeout(() => {
 
 
 // Handle Subscribe buttons
-document.querySelectorAll(".video-carousel .Subscribe").forEach(Subscribe => {
+document.querySelectorAll(".video-carousel .video-slide.S .Subscribe").forEach(Subscribe => {
     Subscribe.addEventListener("click", () => {
         if (Subscribe.classList.contains("active")) {
             Subscribe.classList.remove("active");
@@ -743,7 +743,7 @@ if (touchMoved) {
 });
 
 
-document.querySelectorAll(".video-carousel .video-slide").forEach((Slide,index) => {
+document.querySelectorAll(".video-carousel .video-slide.S").forEach((Slide,index) => {
 
 Slide.querySelector(".like").addEventListener("click",() => {
 
