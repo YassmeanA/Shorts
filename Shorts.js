@@ -507,46 +507,50 @@ document.querySelectorAll(".video-carousel .Subscribe").forEach((Subscribe,index
 
 document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {
 
-Slide.querySelector(".like").addEventListener("click",() => {
+  Slide.querySelector(".like").addEventListener("click", () => {
+    let countA = parseInt(Slide.querySelector(".numA").innerHTML) || 0;
+    let countB = parseInt(Slide.querySelector(".numB").innerHTML) || 0;
 
-countA = Slide.querySelector(".numA").innerHTML;
-countB = Slide.querySelector(".numB").innerHTML;
+    if (Slide.querySelector(".like-filled").classList.contains("active")) {
+      Slide.querySelector(".like-filled").classList.remove("active");
+      countA--;
+    } else {
+      Slide.querySelector(".like-filled").classList.add("active");
+      countA++;
 
-if(Slide.querySelector(".like-filled").classList.contains("active")){
-Slide.querySelector(".like-filled").classList.remove("active");countA--;}
-else{Slide.querySelector(".like-filled").classList.add("active");countA++;
+      if (Slide.querySelector(".dislike-filled").classList.contains("active")) {
+        Slide.querySelector(".dislike-filled").classList.remove("active");
+        countB--;
+      }
+    }
 
-if(Slide.querySelector(".dislike-filled").classList.contains("active")){
-Slide.querySelector(".dislike-filled").classList.remove("active");countB--;};
+    Slide.querySelector(".numA").innerHTML = countA;
+    Slide.querySelector(".numB").innerHTML = countB;
+  });
 
-};
+  Slide.querySelector(".dislike").addEventListener("click", () => {
+    let countA = parseInt(Slide.querySelector(".numA").innerHTML) || 0;
+    let countB = parseInt(Slide.querySelector(".numB").innerHTML) || 0;
 
-Slide.querySelector(".numA").innerHTML = countA;
-Slide.querySelector(".numB").innerHTML = countB;
+    if (Slide.querySelector(".dislike-filled").classList.contains("active")) {
+      Slide.querySelector(".dislike-filled").classList.remove("active");
+      countB--;
+    } else {
+      Slide.querySelector(".dislike-filled").classList.add("active");
+      countB++;
+
+      if (Slide.querySelector(".like-filled").classList.contains("active")) {
+        Slide.querySelector(".like-filled").classList.remove("active");
+        countA--;
+      }
+    }
+
+    Slide.querySelector(".numA").innerHTML = countA;
+    Slide.querySelector(".numB").innerHTML = countB;
+  });
 
 });
-
-Slide.querySelector(".dislike").addEventListener("click",() => {
-
-countA = Slide.querySelector(".numA").innerHTML;
-countB = Slide.querySelector(".numB").innerHTML;
-
-if(Slide.querySelector(".dislike-filled").classList.contains("active")){
-Slide.querySelector(".dislike-filled").classList.remove("active");countB--;}
-else{Slide.querySelector(".dislike-filled").classList.add("active");countB++;
-
-if(Slide.querySelector(".like-filled").classList.contains("active")){
-Slide.querySelector(".like-filled").classList.remove("active");countA--;};
-
-};
-
-Slide.querySelector(".numA").innerHTML = countA;
-Slide.querySelector(".numB").innerHTML = countB;
-
-});
-
-});
-
+    
 
 // Handle Icons click
 document.querySelectorAll(".video-carousel .Icons .Icon").forEach((Icon, index) => {
@@ -1092,8 +1096,7 @@ Slide.querySelector(".video-info").innerHTML += `
     
   document.querySelector(".video-carousel").appendChild(Slide);
   slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
-  countA = 0;
-  countB = 0;
+  
   load();
   HeightOfPage();
   empty();
