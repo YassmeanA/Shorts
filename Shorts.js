@@ -487,7 +487,7 @@ setTimeout(() => {
 
 
 // Handle Subscribe buttons
-document.querySelectorAll(".video-carousel .video-slide .Subscribe").forEach(Subscribe => {
+document.querySelectorAll(".video-carousel .video-slide .Subscribe").forEach((Subscribe,index) => {
     Subscribe.addEventListener("click", () => {
         if (Subscribe.classList.contains("active")) {
             Subscribe.classList.remove("active");
@@ -497,11 +497,11 @@ document.querySelectorAll(".video-carousel .video-slide .Subscribe").forEach(Sub
             Subscribe.innerHTML = "Subscribed";
         }
     });
+
+   Subscribe.style.left = `${document.querySelectorAll(".video-carousel .channel-title span")[index].offsetWidth + 40}px`;
+    
 });
 
-for (let i = 0; i < document.querySelectorAll(".video-carousel .Subscribe").length; i++) {
-    document.querySelectorAll(".Subscribe")[i].style.left = `${document.querySelectorAll(".video-carousel .channel-title span")[i].offsetWidth + 40}px`;
-}
 
 // Handle Icons click
 document.querySelectorAll(".video-carousel .Icons .Icon").forEach((Icon, index) => {
