@@ -51,6 +51,7 @@ const ToggleButton = document.querySelector(".ToggleButton");
 const TBPlay = document.querySelector(".TBPlay");
 const MusicCover = document.querySelector(".MusicCover");
 const ITEM = document.querySelector(".Item");
+const DeleteV = document.querySelector(".deleteV");
 
 
 let videoData = [
@@ -65,6 +66,8 @@ let videoData = [
 [{avatar:"profile6.jpg", username:"@Klara677", comment:"So much emotion in every brushstroke 😍🖼️"}, {avatar:"profile1.jpg", username:"@Amalia550", comment:"Your talent shines through every piece ✨👏"}]
 
 ];
+
+let NumOfVideos = videoData.length;
 
 let comment;
 let x;
@@ -82,26 +85,33 @@ if ("ontouchstart" in document.documentElement)
 
 else {Body.classList.add("mouse");Body.classList.remove("touch");}
 
+
 function HeightOfPage() {
 
 Title2.style.top=`${List1.offsetHeight + 140}px`;
 List2.style.top=`${List1.offsetHeight + 190}px`;
-Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 270}px`;
-Pages[1].style.height=`${List3.offsetHeight + 160}px`;
+Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 230}px`;
+if(document.querySelectorAll(".list3 .item").length === 0){
+Pages[1].querySelector(".empty").style.display="flex";
+Pages[1].style.height="calc(100vh - 110px)";
+}else{
+Pages[1].querySelector(".empty").style.display="none";
+Pages[1].style.height=`${List3.offsetHeight + 120}px`;};
 
 }
 
-HeightOfPage();
-
-window.addEventListener("resize", HeightOfPage);
 
 function empty() {
 
 if(document.querySelectorAll(".list1 .item").length === 0){List1.querySelector(".empty").style.display="flex";List1.style.height="240px";}else{List1.querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".list2 .item").length === 0){List2.querySelector(".empty").style.display="flex";}else{List2.querySelector(".empty").style.display="none";};
-if(document.querySelectorAll(".list3 .item").length === 0){List3.querySelector(".empty").style.display="flex";List3.style.height="calc(100% - 160px)";Pages[1].style.height="calc(100vh - 110px)";}else{List3.querySelector(".empty").style.display="none";};
+if(document.querySelectorAll(".comment").length === 0){document.querySelector(".comments-section .empty").style.display="flex";}else{document.querySelector(".comments-section .empty").style.display="none";};
 
 }
+
+
+HeightOfPage();
+empty();
 
 
 function Comments(index) {
@@ -129,7 +139,7 @@ if(data.isNew){comment.classList.add("added");}
         `;
 
         CommentList.appendChild(comment);
-
+        empty();
 comment.querySelector(".settings").addEventListener("click",() => {
 
 x = i;
@@ -143,31 +153,43 @@ if(comment.classList.contains("added")){
 Settings.classList.add("C");
 Settings.classList.remove("A");
 Settings.classList.remove("B");
+Settings.classList.remove("D");
 
 }else{
 
 Settings.classList.add("B");
 Settings.classList.remove("A");
-Settings.classList.remove("C");};
+Settings.classList.remove("C");
+Settings.classList.remove("D");
+
+};
 
 }, 400);
 
 });
         
-        const p = comment.querySelector("p");
-        comment.style.height = `${p.offsetHeight + 50}px`;
-    }
+const p = comment.querySelector("p");
+comment.style.height = `${p.offsetHeight + 50}px`;
+}
+
 }
 
 
-if(window.innerHeight > 0.56 * window.innerWidth){VideoWrapper.classList.add("screen1");VideoWrapper.classList.remove("screen2");}
-else if(window.innerWidth > 0.56 * window.innerHeight){VideoWrapper.classList.add("screen2");VideoWrapper.classList.remove("screen1");}
 
 window.addEventListener("resize", () => {
-    
-if(window.innerHeight > 0.56 * window.innerWidth){VideoWrapper.classList.add("screen1");VideoWrapper.classList.remove("screen2");}
-else if(window.innerWidth > 0.56 * window.innerHeight){VideoWrapper.classList.add("screen2");VideoWrapper.classList.remove("screen1");}
-        
+ 
+HeightOfPage();   
+if(window.innerWidth > 0.75 * window.innerHeight){
+document.querySelectorAll(".video-slide video").forEach(Video => {Video.style.width = "56vh";});}
+
+else if(window.innerWidth <= 0.75 * window.innerHeight) {
+document.querySelectorAll(".video-slide video").forEach(Video => {Video.style.width = "100vw";});}
+
+Input.style.height = "35px"; // Reset height
+Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
+Footer.style.height=`${Input.offsetHeight + 20}px`;
+if(Input.offsetHeight >= 80){Input.style.border="10px solid #272727";}else{Input.style.border="none";};
+
 });
 
 
@@ -193,14 +215,6 @@ empty();
 });
 });
 
-window.addEventListener("resize", () => {
-   
-   Input.style.height = "35px"; // Reset height
-   Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
-   Footer.style.height=`${Input.offsetHeight + 20}px`;
-   if(Input.offsetHeight >= 80){Input.style.border="10px solid #272727";}else{Input.style.border="none";};
-
- });
 
 Cross.addEventListener("click", () => {
 
@@ -272,9 +286,13 @@ Alert.classList.remove("active");
 
 });
 
+
 save.addEventListener("click", () => {
 
-Alert.innerHTML = "Comment saved";
+if(Settings.classList.contains("D")){
+Alert.innerHTML = "Video saved";
+}else{Alert.innerHTML = "Comment saved";};
+
 
 Alert.classList.add("active");
 
@@ -297,54 +315,117 @@ Body.style.overflowY="auto";
 });
 
 
-function loading() {
 
-document.querySelectorAll(".video-carousel .video-slide .spinner").forEach((Spinner,index) => {
-Spinner.style.display="flex";});
+let isDragging = false, startX, startScrollLeft;
+let dragMoved = false;
 
-document.querySelectorAll(".video-carousel .video-slide video").forEach((Video,index) => {
 
-// When enough data is loaded to play, hide loader
-Video.addEventListener('canplay', () => {
-document.querySelectorAll(".spinner")[index].style.display="none";});
+// Enable horizontal dragging for lists
+  const lists = [List1, List2, List3];
 
-// If video starts buffering later, show loader again
-Video.addEventListener('waiting', () => {
-document.querySelectorAll(".spinner")[index].style.display="flex";});
+  lists.forEach(list => {
 
-// When video resumes playing, hide loader
-Video.addEventListener('playing', () => {
-document.querySelectorAll(".spinner")[index].style.display="none";});
+    const dragStart = (e) => {
+      isDragging = true;
+      dragMoved = false;
+      list.classList.add("dragging");
+      startX = e.pageX;
+      startScrollLeft = list.scrollLeft;
+    };
 
-});
+    const dragging = (e) => {
+      if (!isDragging) return;
+      const dx = e.pageX - startX;
+      if (Math.abs(dx) > 5) dragMoved = true; // movement threshold
+      e.preventDefault();
+      list.scrollLeft = startScrollLeft - dx;
+    };
 
-document.querySelectorAll(".video-carousel .video-slide audio").forEach((Audio,index) => {
+    const dragStop = () => {
+      isDragging = false;
+      setTimeout(() => {
+        list.classList.remove("dragging");
+      }, 200);
+    };
 
-if (Audio.src === "") return;
+    list.addEventListener("mousedown", dragStart);
+    list.addEventListener("mousemove", dragging);
+    list.addEventListener("mouseup", dragStop);
+    list.addEventListener("mouseleave", dragStop);
+  });
 
-// When enough data is loaded to play, hide loader
-Audio.addEventListener('canplay', () => {
-document.querySelectorAll(".spinner")[index].style.display="none";});
 
-// If audio starts buffering later, show loader again
-Audio.addEventListener('waiting', () => {
-document.querySelectorAll(".spinner")[index].style.display="flex";});
 
-// When audio resumes playing, hide loader
-Audio.addEventListener('playing', () => {
-document.querySelectorAll(".spinner")[index].style.display="none";});
+function slideButtons(Slide) {
 
-});
+const index = Array.from(document.querySelectorAll(".video-carousel .video-slide")).indexOf(Slide);
 
+// Subscribe Btn
+Slide.querySelector(".Subscribe").addEventListener("click", () => {
+if (Slide.querySelector(".Subscribe").classList.contains("active")) {
+Slide.querySelector(".Subscribe").classList.remove("active");
+Slide.querySelector(".Subscribe").innerHTML = "Subscribe";
+} else {
+Slide.querySelector(".Subscribe").classList.add("active");
+Slide.querySelector(".Subscribe").innerHTML = "Subscribed";
 }
+});
+
+Slide.querySelector(".Subscribe").style.left = `${Slide.querySelector(".channel-title span").offsetWidth + 40}px`;
+
+  
+//Slide Icons
+Slide.querySelectorAll(".Icons .Icon").forEach(Icon => {
+Icon.addEventListener("click", () => {
+Icon.querySelector(".circle").classList.add("active");
+setTimeout(() => {
+Icon.querySelector(".circle").classList.remove("active");},500);
+});
+});
+
+// Like & Dislike Btns
+Slide.querySelector(".like").addEventListener("click",() => {
+
+countA = Slide.querySelector(".numA").innerHTML;
+countB = Slide.querySelector(".numB").innerHTML;
+
+if(Slide.querySelector(".like-filled").classList.contains("active")){
+Slide.querySelector(".like-filled").classList.remove("active");countA--;}
+else{Slide.querySelector(".like-filled").classList.add("active");countA++;
+
+if(Slide.querySelector(".dislike-filled").classList.contains("active")){
+Slide.querySelector(".dislike-filled").classList.remove("active");countB--;};
+
+};
+
+Slide.querySelector(".numA").innerHTML = countA;
+Slide.querySelector(".numB").innerHTML = countB;
+
+});
+
+Slide.querySelector(".dislike").addEventListener("click",() => {
+
+countA = Slide.querySelector(".numA").innerHTML;
+countB = Slide.querySelector(".numB").innerHTML;
+
+if(Slide.querySelector(".dislike-filled").classList.contains("active")){
+Slide.querySelector(".dislike-filled").classList.remove("active");countB--;}
+else{Slide.querySelector(".dislike-filled").classList.add("active");countB++;
+
+if(Slide.querySelector(".like-filled").classList.contains("active")){
+Slide.querySelector(".like-filled").classList.remove("active");countA--;};
+
+};
+
+Slide.querySelector(".numA").innerHTML = countA;
+Slide.querySelector(".numB").innerHTML = countB;
+
+});
 
 
-
-function load() {
-
-document.querySelectorAll(".video-carousel .Icon.Comment").forEach((CommentIcon,index) => {
-CommentIcon.addEventListener("click", () => {
-       currentVideoIndex = index
+//Comment Icons
+Slide.querySelector(".Icon.Comment").addEventListener("click", () => {
+currentVideoIndex = index
 setTimeout(() => {
 VideoWrapper.classList.add("comments");
 VideoWrapper.classList.add("Comments");},300);
@@ -352,38 +433,131 @@ VideoWrapper.classList.add("Comments");},300);
 Comments(index);
 
 });
-});
 
 
-document.querySelectorAll(".video-carousel .Icon.Share").forEach(ShareIcon => {
-ShareIcon.addEventListener("click", () => {
+// Share Icons
+Slide.querySelector(".Icon.Share").addEventListener("click", () => {
 
 Alert.innerHTML = "Link copied to the clipboard";
 
 Alert.classList.add("active");
 
-setTimeout(() => {
-Alert.classList.remove("active");
-},1500);
+setTimeout(() => {Alert.classList.remove("active");},1500);
 
-//if(ShareIcon.classList.contains("shared")) return;
-//ShareIcon.querySelector("span").innerHTML += 1;
-ShareIcon.classList.add("shared");
-    
+let shareNumber = Slide.querySelector(".Icon.Share").querySelector("span").innerHTML;
+
+if(Slide.querySelector(".Icon.Share").classList.contains("shared")) return;
+Slide.querySelector(".Icon.Share").classList.add("shared");
+shareNumber++;
+Slide.querySelector(".Icon.Share").querySelector("span").innerHTML = shareNumber;
+
+});
+
+
+// (Play-Pause) Video & Audio
+Slide.querySelector("video").onclick = () => {
+
+Slide.querySelector(".TB").classList.remove("active");
+void Slide.querySelector(".TB").offsetWidth;
+Slide.querySelector(".TB").classList.add("active");
+
+if (Slide.querySelector("video").paused) {
+
+Slide.querySelector("video").play();
+Slide.querySelector("audio").play();
+Slide.querySelector(".play").style.display = "none";
+Slide.querySelector(".pause").style.display = "flex";
+
+} else {
+                
+Slide.querySelector("video").pause();
+Slide.querySelector("audio").pause();         
+Slide.querySelector(".play").style.display = "flex";
+Slide.querySelector(".pause").style.display = "none";
+
+}
+
+};
+
+// Only add ended listener once
+Slide.querySelector("video").onended = () => {
+Slide.querySelector("video").currentTime = 0;
+Slide.querySelector("video").play();
+Slide.querySelector("audio").pause();
+Slide.querySelector("audio").currentTime = 0;
+Slide.querySelector("audio").play();
+
+};
+
+
+// Loading Animation
+Slide.querySelector(".spinner").style.display="flex";
+
+// When enough data is loaded to play, hide loader
+Slide.querySelector("video").addEventListener('canplay', () => {
+Slide.querySelector(".spinner").style.display="none";});
+
+// If video starts buffering later, show loader again
+Slide.querySelector("video").addEventListener('waiting', () => {
+Slide.querySelector(".spinner").style.display="flex";});
+
+// When video resumes playing, hide loader
+Slide.querySelector("video").addEventListener('playing', () => {
+Slide.querySelector(".spinner").style.display="none";});
+
+
+if (Slide.querySelector("audio").src === "") return;
+
+// When enough data is loaded to play, hide loader
+Slide.querySelector("audio").addEventListener('canplay', () => {
+Slide.querySelector(".spinner").style.display="none";});
+
+// If audio starts buffering later, show loader again
+Slide.querySelector("audio").addEventListener('waiting', () => {
+Slide.querySelector(".spinner").style.display="flex";});
+
+// When audio resumes playing, hide loader
+Slide.querySelector("audio").addEventListener('playing', () => {
+Slide.querySelector(".spinner").style.display="none";});
+
+
+}  
+
+
+// Attach EventListeners for all Btns of each Slide
+document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {
+slideButtons(Slide);});
+
+
+function load() {
+
+
+// Handle Items click
+document.querySelectorAll(".item").forEach(Item => {
+Item.querySelector(".block").addEventListener("click", () => {
+ 
+if (dragMoved) return;
+const selectedVideo = Item.dataset.video;
+reorderSlides(Item.dataset.video);
+carousel.scrollTop = 0;
+Body.style.overflowY="hidden";
+VideoWrapper.classList.add("active");
+
 });
 });
 
-document.querySelectorAll(".item .settings").forEach(setting => {
+
+document.querySelectorAll(".item .settings").forEach((setting,index) => {
 setting.addEventListener("click", () => {
 
 setting.classList.add("selected");
-
 setting.querySelector(".circle").classList.add("active");
         
 setTimeout(() => {
 setting.querySelector(".circle").classList.remove("active");
 Settings.classList.add("active");
-Settings.classList.add("A");
+if(document.querySelectorAll(".item")[index].classList.contains("new")){Settings.classList.add("D");Settings.classList.remove("A");
+}else{Settings.classList.add("A");Settings.classList.remove("D");};
 Settings.classList.remove("B");
 Settings.classList.remove("C");
 Body.style.overflowY="hidden";
@@ -407,13 +581,15 @@ Enter.addEventListener("click", () => {
 
         videoData[currentVideoIndex].push(newComment);
         Comments(currentVideoIndex);
-
+console.log(videoData[currentVideoIndex].length);
         document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
         
         Input.value = "";
         comment = "";
     }
+    empty();
 });
+
 
 remove.addEventListener("click", () => {
 
@@ -429,7 +605,7 @@ setTimeout(() => {
 
         // Update the comment counter
         document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
-
+        empty();
    }, 500);
   }
 });
@@ -492,155 +668,25 @@ setTimeout(() => {
 });
 
 
-// Handle Subscribe buttons
-document.querySelectorAll(".video-carousel .Subscribe").forEach((Subscribe,index) => {
-    Subscribe.addEventListener("click", () => {
-        if (Subscribe.classList.contains("active")) {
-            Subscribe.classList.remove("active");
-            Subscribe.innerHTML = "Subscribe";
-        } else {
-            Subscribe.classList.add("active");
-            Subscribe.innerHTML = "Subscribed";
-        }
-    });
-
-   Subscribe.style.left = `${document.querySelectorAll(".video-carousel .channel-title span")[index].offsetWidth + 40}px`;
-    
-});
-
-
-document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {
-
-  Slide.querySelector(".like").addEventListener("click", () => {
-    let countA = parseInt(Slide.querySelector(".numA").innerHTML) || 0;
-    let countB = parseInt(Slide.querySelector(".numB").innerHTML) || 0;
-
-    if (Slide.querySelector(".like-filled").classList.contains("active")) {
-      Slide.querySelector(".like-filled").classList.remove("active");
-      countA--;
-    } else {
-      Slide.querySelector(".like-filled").classList.add("active");
-      countA++;
-
-      if (Slide.querySelector(".dislike-filled").classList.contains("active")) {
-        Slide.querySelector(".dislike-filled").classList.remove("active");
-        countB--;
-      }
-    }
-
-    Slide.querySelector(".numA").innerHTML = countA;
-    Slide.querySelector(".numB").innerHTML = countB;
-  });
-
-  Slide.querySelector(".dislike").addEventListener("click", () => {
-    let countA = parseInt(Slide.querySelector(".numA").innerHTML) || 0;
-    let countB = parseInt(Slide.querySelector(".numB").innerHTML) || 0;
-
-    if (Slide.querySelector(".dislike-filled").classList.contains("active")) {
-      Slide.querySelector(".dislike-filled").classList.remove("active");
-      countB--;
-    } else {
-      Slide.querySelector(".dislike-filled").classList.add("active");
-      countB++;
-
-      if (Slide.querySelector(".like-filled").classList.contains("active")) {
-        Slide.querySelector(".like-filled").classList.remove("active");
-        countA--;
-      }
-    }
-
-    Slide.querySelector(".numA").innerHTML = countA;
-    Slide.querySelector(".numB").innerHTML = countB;
-  });
-
-});
-    
-
-// Handle Icons click
-document.querySelectorAll(".video-carousel .Icons .Icon").forEach((Icon, index) => {
-    Icon.addEventListener("click", () => {
-        Icon.querySelector(".circle").classList.add("active");
-        setTimeout(() => {
-            Icon.querySelector(".circle").classList.remove("active");
-        }, 500);
-    });
-});
-
-
-
-let isDragging = false, startX, startScrollLeft;
-let dragMoved = false;
-
-
-// Enable horizontal dragging for lists
-  const lists = [List1, List2, List3];
-
-  lists.forEach(list => {
-
-    const dragStart = (e) => {
-      isDragging = true;
-      dragMoved = false;
-      list.classList.add("dragging");
-      startX = e.pageX;
-      startScrollLeft = list.scrollLeft;
-    };
-
-    const dragging = (e) => {
-      if (!isDragging) return;
-      const dx = e.pageX - startX;
-      if (Math.abs(dx) > 5) dragMoved = true; // movement threshold
-      e.preventDefault();
-      list.scrollLeft = startScrollLeft - dx;
-    };
-
-    const dragStop = () => {
-      isDragging = false;
-      setTimeout(() => {
-        list.classList.remove("dragging");
-      }, 200);
-    };
-
-    list.addEventListener("mousedown", dragStart);
-    list.addEventListener("mousemove", dragging);
-    list.addEventListener("mouseup", dragStop);
-    list.addEventListener("mouseleave", dragStop);
-  });
-
-
-
-// Handle Items click
-document.querySelectorAll(".item").forEach(Item => {
-    Item.querySelector(".block").addEventListener("click", () => {
- if (dragMoved) return;
-        const selectedVideo = Item.dataset.video;
-        reorderSlides(Item.dataset.video);
-        carousel.scrollTop = 0;
-        Body.style.overflowY="hidden";
-        VideoWrapper.classList.add("active");
-        attachVideoEvents(); // reattach click & ended handlers after reordering
-    });
-});
-
-
-
 //Back Btn
 Back.addEventListener("click", () => {
 
 carousel.style.scrollBehavior="auto";
 
 setTimeout(() => {
-        carousel.scrollTop = 0;
-        VideoWrapper.classList.remove("active");
-        Body.style.overflowY="auto";
-        document.querySelectorAll(".video-carousel .video-slide video").forEach((Video,index) => {
-           Video.pause();
-            Video.currentTime = 0;
-           document.querySelectorAll(".video-carousel .video-slide audio")[index].pause();
-        document.querySelectorAll(".video-carousel .video-slide audio")[index].currentTime = 0;
+carousel.scrollTop = 0;
+VideoWrapper.classList.remove("active");
+Body.style.overflowY="auto";
+document.querySelectorAll(".video-carousel .video-slide video").forEach((Video,index) => {
+Video.pause();
+Video.currentTime = 0;
+document.querySelectorAll(".video-carousel .video-slide audio")[index].pause();
+document.querySelectorAll(".video-carousel .video-slide audio")[index].currentTime = 0;
+
 });
 
+}, 300);
 
-    }, 300);
 });
 
 
@@ -679,17 +725,18 @@ document.querySelectorAll(".video-carousel .video-slide audio")[index].play();
 
 // Function to reorder slides
 function reorderSlides(selectedVideo) {
-    const reordered = [
-        ...slides.filter(slide => slide.dataset.video === selectedVideo),
-        ...slides.filter(slide => slide.dataset.video !== selectedVideo)
-    ];
 
-    carousel.innerHTML = "";
-    reordered.forEach(slide => {
-        carousel.appendChild(slide);
-    });
+const reordered = [
+...slides.filter(slide => slide.dataset.video === selectedVideo),
+...slides.filter(slide => slide.dataset.video !== selectedVideo)
+];
 
-    slides = reordered;
+carousel.innerHTML = "";
+reordered.forEach(slide => {
+carousel.appendChild(slide);
+});
+
+slides = reordered;
 
 for(let i = 2; i < document.querySelectorAll(".item").length; i++) {
 
@@ -698,56 +745,21 @@ reordered[i].querySelector("audio").load();
 
 }
 
-    reordered.forEach(slide => {
+reordered.forEach(slide => {
        
-        slide.querySelector("video").pause();
-        slide.querySelector("video").currentTime = 0;
-        slide.querySelector("audio").pause();
-        slide.querySelector("audio").currentTime = 0;
+slide.querySelector("video").pause();
+slide.querySelector("video").currentTime = 0;
+slide.querySelector("audio").pause();
+slide.querySelector("audio").currentTime = 0;
 
-    });
+});
 
-    reordered[0].querySelector("video").play();
-    reordered[0].querySelector("audio").play();
-    loading();
-}
-
-// Attach click & ended listeners for all videos
-function attachVideoEvents() {
     
-    document.querySelectorAll(".video-carousel .video-slide video").forEach((Video,index) => {
-        Video.onclick = () => {
-            document.querySelectorAll(".TB")[index].classList.remove("active");
-            void document.querySelectorAll(".TB")[index].offsetWidth;
-            document.querySelectorAll(".TB")[index].classList.add("active");
-            if (Video.paused) {
-                Video.play();
-                document.querySelectorAll(".video-carousel .video-slide audio")[index].play();
-                document.querySelectorAll(".play")[index].style.display = "none";
-                document.querySelectorAll(".pause")[index].style.display = "flex";
-            } else {
-                Video.pause();
-                document.querySelectorAll(".video-carousel .video-slide audio")[index].pause();         
-                document.querySelectorAll(".play")[index].style.display = "flex";
-                document.querySelectorAll(".pause")[index].style.display = "none";
-            }
-        };
-
-        // Only add ended listener once
-        Video.onended = () => {
-            Video.currentTime = 0;
-            Video.play();
-document.querySelectorAll(".video-carousel .video-slide audio")[index].pause();
-document.querySelectorAll(".video-carousel .video-slide audio")[index].currentTime = 0;
-document.querySelectorAll(".video-carousel .video-slide audio")[index].play();
-
-        };
-    });
-
+reordered[0].querySelector("video").play();
+reordered[0].querySelector("audio").play();
+   
 }
 
-// Initialize events on first load
-attachVideoEvents();
 
 // Active slide management
 const updateActiveSlide = () => {
@@ -788,51 +800,54 @@ carousel.addEventListener("touchmove", () => {
 carousel.addEventListener("touchend", () => {
     
 if (touchMoved) {
-        setTimeout(() => {
-            updateActiveSlide();
-       
-        }, 100);
-    }
+setTimeout(() => {updateActiveSlide();}, 100);
+}
+
 });
 
 
-for (let i = 0; i < videoData.length; i++) {
-    document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
-}
 
+document.querySelectorAll(".video-carousel .Icon.Comment").forEach((Comment,index) => {
+Comment.querySelector("span").innerHTML = videoData[index].length;});
 
 };
 
 
 load();
 
+
 Delete.addEventListener("click", () => {
 
 setTimeout(() => {
-    
-    document.querySelectorAll(".item").forEach(Item => {
-    if(Item.querySelector(".settings").classList.contains("selected")){
-    // Remove the matching slide based on data-video
-    document.querySelectorAll(".video-carousel .video-slide").forEach(slide => {
-      if (slide.dataset.video === Item.dataset.video) {
-        slide.remove();
-        
-      }
-    });
 
-    // Remove the item
-    Item.remove();
-    empty();
-    // Update global slides array after deletion
-    slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
-    HeightOfPage();
-    load();
-}
+  document.querySelectorAll(".item").forEach((Item, index) => {
+    if (Item.querySelector(".settings").classList.contains("selected")) {
+
+      // Remove the matching slide
+      if (document.querySelectorAll(".video-carousel .video-slide")[index]) document.querySelectorAll(".video-carousel .video-slide")[index].remove();
+
+      //Remove the corresponding entry from videoData
+      videoData.splice(index, 1);
+  
+      // Remove the item
+      Item.remove();
+
+      // Cleanup & reload
+      empty();
+      slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
+      HeightOfPage();
+      load();
+
+    }
+  });
+
+}, 500);
+
 });
- }, 500);
 
-});
 
+DeleteV.addEventListener("click", () => {
+Delete.click();});
 
 Add.addEventListener("click", () => {
   // Reset global media state
@@ -847,6 +862,7 @@ Add.addEventListener("click", () => {
 
 UploadVideo.querySelector(".back").addEventListener("click", () => {
   setTimeout(() => {UploadVideo.classList.remove("active");}, 200);
+  Upload1.classList.remove("active");
 });
 
 Upload1.addEventListener("click", () => {
@@ -1035,8 +1051,10 @@ UploadCover.querySelector(".next").addEventListener("click", () => {
 
 Finish.addEventListener("click", () => {
 
-  const newIndex = videoData.length;
-  const newVideoId = `${newIndex + 1}`;
+Finish.style.pointerEvents="none";
+
+  const newVideoId = `${NumOfVideos + 1}`;
+
 
   videoData.push([]);
   const musicCover = document.querySelector('.UploadVideo .cover').src;
@@ -1061,7 +1079,7 @@ Finish.addEventListener("click", () => {
   document.querySelector(".list3").appendChild(item);
 
   const Slide = document.createElement("li");
-  Slide.className = "video-slide";
+  Slide.className = "video-slide new";
   Slide.dataset.video = newVideoId;
   Slide.innerHTML = `
 <video preload="auto" class="video" poster="">
@@ -1081,7 +1099,7 @@ Finish.addEventListener("click", () => {
 <section class="Channel">
 <img src="${channelImg}">
 <div class="channel-title"><span>${channelName}</span></div>
-<button class="Subscribe">Subscribe</button>
+<button class="Subscribe" style="display:none;">Subscribe</button>
 </section>
 <section class="Title"><span>${uploadedTitle}</span></section>
 </div>
@@ -1100,13 +1118,16 @@ Slide.querySelector(".video-info").innerHTML += `
     
   document.querySelector(".video-carousel").appendChild(Slide);
   slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
-  
+
+  Slide.querySelector("video").style.width = "56vh";
+
+  slideButtons(Slide);
   load();
   HeightOfPage();
   empty();
 
+  NumOfVideos++;
 
-    
   Alert.innerHTML = "Video uploaded successfully";
   Alert.classList.add("active");
   setTimeout(() => {UploadVideo.classList.remove("active");},300);
@@ -1145,6 +1166,7 @@ Slide.querySelector(".video-info").innerHTML += `
   ITEM.querySelector("img").src = "default-cover.svg";
 
   Finish.style.display = "none";
+  Finish.style.pointerEvents="auto";
   },600);
                     
 });
