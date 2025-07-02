@@ -90,13 +90,13 @@ function HeightOfPage() {
 
 Title2.style.top=`${List1.offsetHeight + 140}px`;
 List2.style.top=`${List1.offsetHeight + 190}px`;
-Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 230}px`;
+Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 270}px`;
 if(document.querySelectorAll(".list3 .item").length === 0){
 Pages[1].querySelector(".empty").style.display="flex";
 Pages[1].style.height="calc(100vh - 110px)";
 }else{
 Pages[1].querySelector(".empty").style.display="none";
-Pages[1].style.height=`${List3.offsetHeight + 120}px`;};
+Pages[1].style.height=`${List3.offsetHeight + 160}px`;};
 
 }
 
