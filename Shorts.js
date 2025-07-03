@@ -170,10 +170,11 @@ Settings.classList.remove("D");
         
 const p = comment.querySelector("p");
 comment.style.height = `${p.offsetHeight + 50}px`;
-document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
-        
+
  }
 
+document.querySelectorAll(".video-carousel .Icon.Comment")[index].querySelector("span").innerHTML = videoData[index].length;
+    
 }
 
 
@@ -583,9 +584,7 @@ Enter.addEventListener("click", () => {
 
         videoData[currentVideoIndex].push(newComment);
         Comments(currentVideoIndex);
-console.log(videoData[currentVideoIndex].length);
-        document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
-        
+
         Input.value = "";
         comment = "";
     }
