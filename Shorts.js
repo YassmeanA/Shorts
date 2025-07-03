@@ -170,7 +170,9 @@ Settings.classList.remove("D");
         
 const p = comment.querySelector("p");
 comment.style.height = `${p.offsetHeight + 50}px`;
-}
+document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
+        
+ }
 
 }
 
@@ -805,10 +807,13 @@ setTimeout(() => {updateActiveSlide();}, 100);
 
 });
 
+    
+for (let i = 0; i < document.querySelectorAll(".video-carousel .Icon.Comment").length; i++) {
 
+document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
 
-document.querySelectorAll(".video-carousel .Icon.Comment").forEach((Comment,index) => {
-Comment.querySelector("span").innerHTML = videoData[index].length;});
+};
+    
 
 };
 
