@@ -173,7 +173,7 @@ comment.style.height = `${p.offsetHeight + 50}px`;
 
  }
 
-document.querySelectorAll(".video-carousel .Icon.Comment")[index].querySelector("span").innerHTML = videoData[index].length;
+document.querySelectorAll(".video-carousel .Icon.Comment")[2].querySelector("span").innerHTML = videoData[2].length;
     
 }
 
