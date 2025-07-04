@@ -173,7 +173,7 @@ comment.style.height = `${p.offsetHeight + 50}px`;
 
  }
 
-document.querySelectorAll(".video-carousel .Icon.Comment")[2].querySelector("span").innerHTML = videoData[2].length;
+document.querySelectorAll(".video-carousel .video-slide")[index].querySelector(".Icon.Comment span").innerHTML = videoData[index].length;
     
 }
 
@@ -604,9 +604,7 @@ setTimeout(() => {
         // Refresh the comment list UI
         Comments(currentVideoIndex);
 
-        // Update the comment counter
-        document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
-        empty();
+       empty();
    }, 500);
   }
 });
@@ -629,9 +627,6 @@ setTimeout(() => {
 
      // Refresh comment list (removes the comment visually)
      Comments(currentVideoIndex);
-
-     // Update counter
-     document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
 
      // When user presses Enter, treat as an updated comment
      Enter.onclick = () => {
