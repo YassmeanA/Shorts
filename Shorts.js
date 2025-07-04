@@ -116,7 +116,6 @@ empty();
 function Comments(index) {
     const comments = videoData[index]; // Get the comment list for this video
     const CommentList = document.querySelector(".comments-list"); // Make sure this matches your HTML
-    document.querySelectorAll(".video-carousel .video-slide")[index].querySelector(".Icon.Comment span").innerHTML = comments.length;
     
     CommentList.innerHTML="";
     for (let i = 0; i < comments.length; i++) {
@@ -173,6 +172,13 @@ comment.style.height = `${p.offsetHeight + 50}px`;
 
  }
 
+
+    for (let i = 0; i < document.querySelectorAll(".video-carousel .Icon.Comment").length; i++) {
+
+document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
+
+};
+    
 }
 
 
