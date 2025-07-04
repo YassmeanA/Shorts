@@ -169,8 +169,7 @@ function Comments(index) {
     }
 
     // Update the comment count span for the current video slide
-    const span = document.querySelectorAll(".video-carousel .video-slide")[index]
-        .querySelector(".Icon.Comment span");
+    const span = document.querySelectorAll(".video-carousel .video-slide")[index].querySelector(".Icon.Comment span");
     span.innerHTML = comments.length;
 }
 
@@ -644,9 +643,6 @@ setTimeout(() => {
       videoData[currentVideoIndex].splice(x, 0, updatedComment);
       Comments(currentVideoIndex);
 
-      // Update counter again
-      document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
-
       
       Input.value = "";
       comment = "";
@@ -802,7 +798,7 @@ setTimeout(() => {updateActiveSlide();}, 100);
     
 for (let i = 0; i < document.querySelectorAll(".video-carousel .Icon.Comment").length; i++) {
 
-document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
+document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length - 1;
 
 };
     
