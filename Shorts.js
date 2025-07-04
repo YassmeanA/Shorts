@@ -56,16 +56,17 @@ const DeleteV = document.querySelector(".deleteV");
 
 let videoData = [
 
-[{avatar:"profile1.jpg", username:"@Amalia550", comment:"WOW!!! I really want to try this recipe 😋😋"}, {avatar:"profile2.jpg", username:"@Christina234", comment:"So Yummy ..."}, {avatar:"profile3.jpg", username:"@Gwen489", comment:"How is this even real?! It looks better than restaurant food 🤤"}],
-[{avatar:"profile5.jpg", username:"@Kila805", comment:"This looks absolutely mouthwatering! 😍 Can’t wait to give it a try!"}, {avatar:"profile6.jpg", username:"@Klara677", comment:"Just saved this — making it tonight for sure! 🍽️🔥"}, {avatar:"profile1.jpg", username:"@Amalia550", comment:"Adding this to my weekend menu ASAP! 😍 Thanks for sharing!"}, {avatar:"profile4.jpg", username:"@Katie267", comment:"I’m drooling already… this is a must-try for me! 🙌🍴"}],
-[{avatar:"profile10.jpg", username:"@Rose996", comment:"OMG 😱 This recipe is calling my name!!"}, {avatar:"profile8.jpg", username:"@Martina285", comment:"That looks insanely good 😍 I can almost taste it through the screen!"}],
-[{avatar:"profile3.jpg", username:"@Gwen489", comment:"YUM!! This is exactly what I’ve been craving 😋"}, {avatar:"profile9.jpg", username:"@Lola556", comment:"SO TASTY 🤩"}],
-[{avatar:"profile2.jpg", username:"@Christina234", comment:"Absolutely stunning! This design is a showstopper 😍✨"}, {avatar:"profile3.jpg", username:"Gwen489", comment:"Wow!! The detail on this dress is incredible 😱💖"}, {avatar:"profile8.jpg", username:"@Martina285", comment:"This is pure elegance 😍 I need this in my wardrobe!"}, {avatar:"profile1.jpg", username:"@Amalia550", comment:"Obsessed with the cut and fabric — such a masterpiece 😍👏"}, {avatar:"profile6.jpg", username:"@Klara677", comment:"This dress is giving main character energy 💃🔥"}],
-[{avatar:"profile4.jpg", username:"@Katie267", comment:"So chic and unique! I’ve never seen anything like it 😍"}, {avatar:"profile3.jpg", username:"@Gwen489", comment:"Total fashion goals! You nailed this design 😍🖤"}, {avatar:"profile10.jpg", username:"@Rose996", comment:"I’m in love with every detail — perfection from top to bottom 😩✨"}],
-[{avatar:"profile7.jpg", username:"@Lisa143", comment:"Amazing texture and color — so powerful 🎨🔥"}, {avatar:"profile9.jpg", username:"@Lola556", comment:"Your style is bold and beautiful 💫🖌️"}, {avatar:"profile10.jpg", username:"@Rose890", comment:"Incredible use of acrylics — love this ❤️🎨"}],
-[{avatar:"profile6.jpg", username:"@Klara677", comment:"So much emotion in every brushstroke 😍🖼️"}, {avatar:"profile1.jpg", username:"@Amalia550", comment:"Your talent shines through every piece ✨👏"}]
+[{ number: 1 }, {avatar:"profile1.jpg", username:"@Amalia550", comment:"WOW!!! I really want to try this recipe 😋😋"}, {avatar:"profile2.jpg", username:"@Christina234", comment:"So Yummy ..."}, {avatar:"profile3.jpg", username:"@Gwen489", comment:"How is this even real?! It looks better than restaurant food 🤤"}],
+[{ number: 2 }, {avatar:"profile5.jpg", username:"@Kila805", comment:"This looks absolutely mouthwatering! 😍 Can’t wait to give it a try!"}, {avatar:"profile6.jpg", username:"@Klara677", comment:"Just saved this — making it tonight for sure! 🍽️🔥"}, {avatar:"profile1.jpg", username:"@Amalia550", comment:"Adding this to my weekend menu ASAP! 😍 Thanks for sharing!"}, {avatar:"profile4.jpg", username:"@Katie267", comment:"I’m drooling already… this is a must-try for me! 🙌🍴"}],
+[{ number: 3 }, {avatar:"profile10.jpg", username:"@Rose996", comment:"OMG 😱 This recipe is calling my name!!"}, {avatar:"profile8.jpg", username:"@Martina285", comment:"That looks insanely good 😍 I can almost taste it through the screen!"}],
+[{ number: 4 }, {avatar:"profile3.jpg", username:"@Gwen489", comment:"YUM!! This is exactly what I’ve been craving 😋"}, {avatar:"profile9.jpg", username:"@Lola556", comment:"SO TASTY 🤩"}],
+[{ number: 5 }, {avatar:"profile2.jpg", username:"@Christina234", comment:"Absolutely stunning! This design is a showstopper 😍✨"}, {avatar:"profile3.jpg", username:"Gwen489", comment:"Wow!! The detail on this dress is incredible 😱💖"}, {avatar:"profile8.jpg", username:"@Martina285", comment:"This is pure elegance 😍 I need this in my wardrobe!"}, {avatar:"profile1.jpg", username:"@Amalia550", comment:"Obsessed with the cut and fabric — such a masterpiece 😍👏"}, {avatar:"profile6.jpg", username:"@Klara677", comment:"This dress is giving main character energy 💃🔥"}],
+[{ number: 6 }, {avatar:"profile4.jpg", username:"@Katie267", comment:"So chic and unique! I’ve never seen anything like it 😍"}, {avatar:"profile3.jpg", username:"@Gwen489", comment:"Total fashion goals! You nailed this design 😍🖤"}, {avatar:"profile10.jpg", username:"@Rose996", comment:"I’m in love with every detail — perfection from top to bottom 😩✨"}],
+[{ number: 7 }, {avatar:"profile7.jpg", username:"@Lisa143", comment:"Amazing texture and color — so powerful 🎨🔥"}, {avatar:"profile9.jpg", username:"@Lola556", comment:"Your style is bold and beautiful 💫🖌️"}, {avatar:"profile10.jpg", username:"@Rose890", comment:"Incredible use of acrylics — love this ❤️🎨"}],
+[{ number: 8 }, {avatar:"profile6.jpg", username:"@Klara677", comment:"So much emotion in every brushstroke 😍🖼️"}, {avatar:"profile1.jpg", username:"@Amalia550", comment:"Your talent shines through every piece ✨👏"}]
 
 ];
+
 
 let NumOfVideos = videoData.length;
 
@@ -113,18 +114,23 @@ if(document.querySelectorAll(".comment").length === 0){document.querySelector(".
 HeightOfPage();
 empty();
 
-
 function Comments(index) {
-    const comments = videoData[index]; // Get the comment list for this video
-    const CommentList = document.querySelector(".comments-list"); // Make sure this matches your HTML
-    
-    CommentList.innerHTML="";
+    // Find the array that matches the current slide (numbering starts from 1)
+    const match = videoData.find(subArray => subArray[0].number === index + 1);
+
+    if (!match) return;
+
+    const comments = match.slice(1); // skip the first item which is { number: x }
+    const CommentList = document.querySelector(".comments-list");
+
+    CommentList.innerHTML = "";
+
     for (let i = 0; i < comments.length; i++) {
         const data = comments[i];
         const comment = document.createElement('li');
-        
-comment.className = "comment";
-if(data.isNew){comment.classList.add("added");}
+
+        comment.className = "comment";
+        if (data.isNew) comment.classList.add("added");
 
         comment.innerHTML = `
             <div class="settings">
@@ -140,42 +146,34 @@ if(data.isNew){comment.classList.add("added");}
 
         CommentList.appendChild(comment);
         empty();
-comment.querySelector(".settings").addEventListener("click",() => {
 
-x = i;
+        comment.querySelector(".settings").addEventListener("click", () => {
+            x = i;
+            comment.querySelector(".settings .circle").classList.add("active");
+            setTimeout(() => {
+                comment.querySelector(".settings .circle").classList.remove("active");
+                Settings.classList.add("active");
 
-comment.querySelector(".settings .circle").classList.add("active");
-setTimeout(() => {
-comment.querySelector(".settings .circle").classList.remove("active");
-Settings.classList.add("active");
-if(comment.classList.contains("added")){
+                if (comment.classList.contains("added")) {
+                    Settings.classList.add("C");
+                    Settings.classList.remove("A", "B", "D");
+                } else {
+                    Settings.classList.add("B");
+                    Settings.classList.remove("A", "C", "D");
+                }
+            }, 400);
+        });
 
-Settings.classList.add("C");
-Settings.classList.remove("A");
-Settings.classList.remove("B");
-Settings.classList.remove("D");
+        const p = comment.querySelector("p");
+        comment.style.height = `${p.offsetHeight + 50}px`;
+    }
 
-}else{
-
-Settings.classList.add("B");
-Settings.classList.remove("A");
-Settings.classList.remove("C");
-Settings.classList.remove("D");
-
-};
-
-}, 400);
-
-});
-        
-const p = comment.querySelector("p");
-comment.style.height = `${p.offsetHeight + 50}px`;
-
- }
-
-document.querySelectorAll(".video-carousel .video-slide")[index].querySelector(".Icon.Comment span").innerHTML = videoData[index].length;
-    
+    // Update the comment count span for the current video slide
+    const span = document.querySelectorAll(".video-carousel .video-slide")[index]
+        .querySelector(".Icon.Comment span");
+    span.innerHTML = comments.length;
 }
+
 
 
 
