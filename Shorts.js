@@ -798,7 +798,7 @@ setTimeout(() => {updateActiveSlide();}, 100);
     
 for (let i = 0; i < document.querySelectorAll(".video-carousel .Icon.Comment").length; i++) {
 
-document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length - 1;
+document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
 
 };
     
