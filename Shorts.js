@@ -170,14 +170,7 @@ Settings.classList.remove("D");
 const p = comment.querySelector("p");
 comment.style.height = `${p.offsetHeight + 50}px`;
 
- }
-
-
-    for (let i = 0; i < document.querySelectorAll(".video-carousel .Icon.Comment").length; i++) {
-
-document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
-
-};
+}
     
 }
 
@@ -587,7 +580,11 @@ Enter.addEventListener("click", () => {
 
         videoData[currentVideoIndex].push(newComment);
         Comments(currentVideoIndex);
+for (let i = 0; i < document.querySelectorAll(".video-carousel .Icon.Comment").length; i++) {
 
+document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
+
+};
         Input.value = "";
         comment = "";
     }
