@@ -580,11 +580,10 @@ Enter.addEventListener("click", () => {
 
         videoData[currentVideoIndex].push(newComment);
         Comments(currentVideoIndex);
-for (let i = 0; i < document.querySelectorAll(".video-carousel .Icon.Comment").length; i++) {
+ 
+document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
 
-document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
 
-};
         Input.value = "";
         comment = "";
     }
