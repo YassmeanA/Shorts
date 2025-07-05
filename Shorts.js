@@ -1,3 +1,4 @@
+
 const Body = document.querySelector(".Body");
 const VideoWrapper = document.querySelector(".video-wrapper");
 const VideoContainer = document.querySelector(".video-container");
@@ -67,9 +68,7 @@ let videoData = [
 
 ];
 
-
 let NumOfVideos = videoData.length;
-
 let comment;
 let x;
 let countA;
@@ -91,13 +90,13 @@ function HeightOfPage() {
 
 Title2.style.top=`${List1.offsetHeight + 140}px`;
 List2.style.top=`${List1.offsetHeight + 190}px`;
-Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 270}px`;
+Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 230}px`;
 if(document.querySelectorAll(".list3 .item").length === 0){
 Pages[1].querySelector(".empty").style.display="flex";
 Pages[1].style.height="calc(100vh - 110px)";
 }else{
 Pages[1].querySelector(".empty").style.display="none";
-Pages[1].style.height=`${List3.offsetHeight + 160}px`;};
+Pages[1].style.height=`${List3.offsetHeight + 120}px`;};
 
 }
 
@@ -110,13 +109,16 @@ if(document.querySelectorAll(".comment").length === 0){document.querySelector(".
 
 }
 
+
 HeightOfPage();
 empty();
 
+
 function Comments(index) {
+  
     const comments = videoData[index]; // Get the comment list for this video
     const CommentList = document.querySelector(".comments-list"); // Make sure this matches your HTML
-    
+   
     CommentList.innerHTML="";
     for (let i = 0; i < comments.length; i++) {
         const data = comments[i];
@@ -169,20 +171,20 @@ Settings.classList.remove("D");
         
 const p = comment.querySelector("p");
 comment.style.height = `${p.offsetHeight + 50}px`;
+}
 
 }
-    
-}
+
 
 
 window.addEventListener("resize", () => {
  
 HeightOfPage();   
-if(window.innerWidth > 0.75 * window.innerHeight){
-document.querySelectorAll(".video-slide video").forEach(Video => {Video.style.width = "56vh";});}
+if (window.innerWidth > 0.75 * window.innerHeight){
+document.querySelectorAll(".video-carousel .video-slide video").forEach(Video => {Video.style.width = "56%";});}
 
-else if(window.innerWidth <= 0.75 * window.innerHeight) {
-document.querySelectorAll(".video-slide video").forEach(Video => {Video.style.width = "100vw";});}
+else {
+document.querySelectorAll(".video-carousel .video-slide video").forEach(Video => {Video.style.width = "100%";});}
 
 Input.style.height = "35px"; // Reset height
 Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
@@ -195,7 +197,7 @@ if(Input.offsetHeight >= 80){Input.style.border="10px solid #272727";}else{Input
 Background.addEventListener("click", () => {
 
 Settings.classList.remove("active");
-Body.style.overflowY="auto";
+if(VideoWrapper.classList.contains("active")){Body.style.overflowY="hidden";}else{Body.style.overflowY="auto";};
 
 });
 
@@ -243,7 +245,8 @@ Option.querySelector(".circle").classList.add("active");
 setTimeout(() => {
 Settings.classList.remove("active");
 Option.querySelector(".circle").classList.remove("active");
-Body.style.overflowY="auto";
+
+if(VideoWrapper.classList.contains("active")){Body.style.overflowY="hidden";}else{Body.style.overflowY="auto";};
 
 }, 500);
 
@@ -308,7 +311,7 @@ back.addEventListener("click", () => {
 SubPages.forEach(SubPage => {
 SubPage.classList.remove("active");});
 
-Body.style.overflowY="auto";
+if(VideoWrapper.classList.contains("active")){Body.style.overflowY="hidden";}else{Body.style.overflowY="auto";};
 
 });
 });
@@ -422,17 +425,17 @@ Slide.querySelector(".numB").innerHTML = countB;
 });
 
 
+
 //Comment Icons
 Slide.querySelector(".Icon.Comment").addEventListener("click", () => {
-currentVideoIndex = index
+currentVideoIndex = index;
+
 setTimeout(() => {
 VideoWrapper.classList.add("comments");
 VideoWrapper.classList.add("Comments");},300);
-
 Comments(index);
 
 });
-
 
 // Share Icons
 Slide.querySelector(".Icon.Share").addEventListener("click", () => {
@@ -533,17 +536,31 @@ function load() {
 
 // Handle Items click
 document.querySelectorAll(".item").forEach(Item => {
-Item.querySelector(".block").addEventListener("click", () => {
- 
-if (dragMoved) return;
-const selectedVideo = Item.dataset.video;
-reorderSlides(Item.dataset.video);
-carousel.scrollTop = 0;
-Body.style.overflowY="hidden";
-VideoWrapper.classList.add("active");
+  Item.querySelector(".block").addEventListener("click", () => {
+    if (dragMoved) return;
 
+    // Reorder using CSS order
+    reorderSlides(Item.dataset.video);
+
+    // Scroll to top of the carousel
+    carousel.scrollTop = 0;
+
+    // Prevent body scroll
+    Body.style.overflowY = "hidden";
+
+    // Show video player
+    VideoWrapper.classList.add("active");
+
+    // Mark the selected slide as "active" for index tracking
+    document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {
+      Slide.classList.remove("active");
+      if (Slide.dataset.video === Item.dataset.video) {
+        Slide.classList.add("active");
+      }
+    });
+  });
 });
-});
+
 
 
 document.querySelectorAll(".item .settings").forEach((setting,index) => {
@@ -564,7 +581,7 @@ Body.style.overflowY="hidden";
 
 });
 });
-  
+
 
 Enter.addEventListener("click", () => {
     Input.style.height = "35px"; // Reset height
@@ -580,9 +597,9 @@ Enter.addEventListener("click", () => {
 
         videoData[currentVideoIndex].push(newComment);
         Comments(currentVideoIndex);
- 
-document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex].length;
 
+        // ✅ Get the matching slide
+        document.querySelectorAll(".video-carousel .video-slide")[currentVideoIndex].querySelector(".Icon.Comment span").innerHTML = videoData[currentVideoIndex].length;
 
         Input.value = "";
         comment = "";
@@ -598,12 +615,15 @@ if (currentVideoIndex !== null && x !== undefined) {
 setTimeout(() => {
 
        // Remove the comment from the array
-        videoData[currentVideoIndex].splice(x, 1);
+       videoData[currentVideoIndex].splice(x, 1);
 
-        // Refresh the comment list UI
-        Comments(currentVideoIndex);
+       // Refresh the comment list UI
+       Comments(currentVideoIndex);
 
-       empty();
+       // ✅ Get the matching slide
+       document.querySelectorAll(".video-carousel .video-slide")[currentVideoIndex].querySelector(".Icon.Comment span").innerHTML = videoData[currentVideoIndex].length;
+
+      empty();
    }, 500);
   }
 });
@@ -627,6 +647,9 @@ setTimeout(() => {
      // Refresh comment list (removes the comment visually)
      Comments(currentVideoIndex);
 
+     // ✅ Get the matching slide
+     document.querySelectorAll(".video-carousel .video-slide")[currentVideoIndex].querySelector(".Icon.Comment span").innerHTML = videoData[currentVideoIndex].length;
+
      // When user presses Enter, treat as an updated comment
      Enter.onclick = () => {
      Input.style.height = "35px";
@@ -645,7 +668,10 @@ setTimeout(() => {
       videoData[currentVideoIndex].splice(x, 0, updatedComment);
       Comments(currentVideoIndex);
 
+      // Update counter again
+      document.querySelectorAll(".video-carousel .Icon.Comment")[currentVideoIndex].querySelector("span").innerHTML = videoData[currentVideoIndex + 1].length;
       
+
       Input.value = "";
       comment = "";
 
@@ -655,7 +681,7 @@ setTimeout(() => {
        }
      };
    }
-    
+  
 }, 500);
 });
 
@@ -715,41 +741,32 @@ document.querySelectorAll(".video-carousel .video-slide audio")[index].play();
 
 });
 
-// Function to reorder slides
 function reorderSlides(selectedVideo) {
+  const allSlides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
 
-const reordered = [
-...slides.filter(slide => slide.dataset.video === selectedVideo),
-...slides.filter(slide => slide.dataset.video !== selectedVideo)
-];
+  allSlides.forEach((slide, index) => {
+      const isSelected = slide.dataset.video === selectedVideo;
 
-carousel.innerHTML = "";
-reordered.forEach(slide => {
-carousel.appendChild(slide);
-});
+      // Assign lower order (e.g., 0) to the selected video, and higher order (e.g., 1+) to the rest
+      slide.style.order = isSelected ? 0 : index + 1;
 
-slides = reordered;
+      // Reset playback state
+      const video = slide.querySelector("video");
+      const audio = slide.querySelector("audio");
+      video.pause();
+      video.currentTime = 0;
+      audio.pause();
+      audio.currentTime = 0;
+  });
 
-for(let i = 2; i < document.querySelectorAll(".item").length; i++) {
-
-reordered[i].querySelector("video").load();
-reordered[i].querySelector("audio").load();
-
-}
-
-reordered.forEach(slide => {
-       
-slide.querySelector("video").pause();
-slide.querySelector("video").currentTime = 0;
-slide.querySelector("audio").pause();
-slide.querySelector("audio").currentTime = 0;
-
-});
-
-    
-reordered[0].querySelector("video").play();
-reordered[0].querySelector("audio").play();
-   
+  // Play the selected slide
+  const selectedSlide = allSlides.find(slide => slide.dataset.video === selectedVideo);
+  if (selectedSlide) {
+      const video = selectedSlide.querySelector("video");
+      const audio = selectedSlide.querySelector("audio");
+      video.play();
+      audio.play();
+  }
 }
 
 
@@ -797,16 +814,15 @@ setTimeout(() => {updateActiveSlide();}, 100);
 
 });
 
-    
+
+
 for (let i = 0; i < document.querySelectorAll(".video-carousel .Icon.Comment").length; i++) {
 
-document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
-
-};
-    
+  document.querySelectorAll(".video-carousel .Icon.Comment")[i].querySelector("span").innerHTML = videoData[i].length;
 
 };
 
+}
 
 load();
 
@@ -817,22 +833,21 @@ setTimeout(() => {
 
   document.querySelectorAll(".item").forEach((Item, index) => {
     if (Item.querySelector(".settings").classList.contains("selected")) {
-
+   
       // Remove the matching slide
-      if (document.querySelectorAll(".video-carousel .video-slide")[index]) document.querySelectorAll(".video-carousel .video-slide")[index].remove();
-
+      document.querySelectorAll(".video-carousel .video-slide")[index].remove();
+      console.log(index)
       //Remove the corresponding entry from videoData
       videoData.splice(index, 1);
-  
+
       // Remove the item
       Item.remove();
-
+     
       // Cleanup & reload
       empty();
-      slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
       HeightOfPage();
       load();
-
+      
     }
   });
 
@@ -949,6 +964,7 @@ UploadAudio.querySelector(".video-input").addEventListener("input", () => {
 
 Skip.addEventListener("click", () => {
   Skip.classList.add("active");
+  Upload2.classList.remove("active");
   UploadAudio.querySelector(".audio-container").style.display = "none";
   UploadAudio.querySelector(".cover-container").style.display = "flex";
   UploadAudio.querySelector(".titleV-container").style.display = "flex";
@@ -1114,7 +1130,7 @@ Slide.querySelector(".video-info").innerHTML += `
   document.querySelector(".video-carousel").appendChild(Slide);
   slides = Array.from(document.querySelectorAll(".video-carousel .video-slide"));
 
-  Slide.querySelector("video").style.width = "56vh";
+  Slide.querySelector("video").style.width = "56%";
 
   slideButtons(Slide);
   load();
