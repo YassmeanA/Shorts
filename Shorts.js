@@ -1,4 +1,3 @@
-
 const Body = document.querySelector(".Body");
 const VideoWrapper = document.querySelector(".video-wrapper");
 const VideoContainer = document.querySelector(".video-container");
@@ -90,13 +89,13 @@ function HeightOfPage() {
 
 Title2.style.top=`${List1.offsetHeight + 140}px`;
 List2.style.top=`${List1.offsetHeight + 190}px`;
-Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 230}px`;
+Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 270}px`;
 if(document.querySelectorAll(".list3 .item").length === 0){
 Pages[1].querySelector(".empty").style.display="flex";
 Pages[1].style.height="calc(100vh - 110px)";
 }else{
 Pages[1].querySelector(".empty").style.display="none";
-Pages[1].style.height=`${List3.offsetHeight + 120}px`;};
+Pages[1].style.height=`${List3.offsetHeight + 160}px`;};
 
 }
 
@@ -105,7 +104,6 @@ function empty() {
 
 if(document.querySelectorAll(".list1 .item").length === 0){List1.querySelector(".empty").style.display="flex";List1.style.height="240px";}else{List1.querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".list2 .item").length === 0){List2.querySelector(".empty").style.display="flex";}else{List2.querySelector(".empty").style.display="none";};
-if(document.querySelectorAll(".comment").length === 0){document.querySelector(".comments-section .empty").style.display="flex";}else{document.querySelector(".comments-section .empty").style.display="none";};
 
 }
 
@@ -141,6 +139,7 @@ if(data.isNew){comment.classList.add("added");}
 
         CommentList.appendChild(comment);
         empty();
+
 comment.querySelector(".settings").addEventListener("click",() => {
 
 x = i;
@@ -181,10 +180,16 @@ window.addEventListener("resize", () => {
  
 HeightOfPage();   
 if (window.innerWidth > 0.75 * window.innerHeight){
-document.querySelectorAll(".video-carousel .video-slide video").forEach(Video => {Video.style.width = "56%";});}
+document.querySelectorAll(".video-carousel .video-slide video").forEach(Video => {Video.style.width = "auto";});}
 
 else {
 document.querySelectorAll(".video-carousel .video-slide video").forEach(Video => {Video.style.width = "100%";});}
+
+document.querySelectorAll(".comments-section .comment").forEach(Comment => {
+const p = Comment.querySelector("p");
+Comment.style.height = `${p.offsetHeight + 50}px`;
+});
+
 
 Input.style.height = "35px"; // Reset height
 Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
@@ -425,18 +430,6 @@ Slide.querySelector(".numB").innerHTML = countB;
 });
 
 
-
-//Comment Icons
-Slide.querySelector(".Icon.Comment").addEventListener("click", () => {
-currentVideoIndex = index;
-
-setTimeout(() => {
-VideoWrapper.classList.add("comments");
-VideoWrapper.classList.add("Comments");},300);
-Comments(index);
-
-});
-
 // Share Icons
 Slide.querySelector(".Icon.Share").addEventListener("click", () => {
 
@@ -583,6 +576,20 @@ Body.style.overflowY="hidden";
 });
 
 
+//Comment Icons
+document.querySelectorAll(".video-carousel .video-slide .Icon.Comment").forEach((CommentIcon,index) => {
+CommentIcon.addEventListener("click", () => {
+  currentVideoIndex = index;
+  console.log(currentVideoIndex)
+  setTimeout(() => {
+  VideoWrapper.classList.add("comments");
+  VideoWrapper.classList.add("Comments");},300);
+  Comments(index);
+  if(videoData[index].length === 0){document.querySelector(".comments-section .empty").style.display="flex";}else{document.querySelector(".comments-section .empty").style.display="none";};
+
+});
+  });
+
 Enter.addEventListener("click", () => {
     Input.style.height = "35px"; // Reset height
     Input.style.border="none";
@@ -597,14 +604,16 @@ Enter.addEventListener("click", () => {
 
         videoData[currentVideoIndex].push(newComment);
         Comments(currentVideoIndex);
+        if(videoData[currentVideoIndex].length === 0){document.querySelector(".comments-section .empty").style.display="flex";}else{document.querySelector(".comments-section .empty").style.display="none";};
 
         // ✅ Get the matching slide
         document.querySelectorAll(".video-carousel .video-slide")[currentVideoIndex].querySelector(".Icon.Comment span").innerHTML = videoData[currentVideoIndex].length;
 
         Input.value = "";
         comment = "";
+        empty();
     }
-    empty();
+   
 });
 
 
@@ -619,11 +628,13 @@ setTimeout(() => {
 
        // Refresh the comment list UI
        Comments(currentVideoIndex);
+       if(videoData[currentVideoIndex].length === 0){document.querySelector(".comments-section .empty").style.display="flex";}else{document.querySelector(".comments-section .empty").style.display="none";};
 
        // ✅ Get the matching slide
        document.querySelectorAll(".video-carousel .video-slide")[currentVideoIndex].querySelector(".Icon.Comment span").innerHTML = videoData[currentVideoIndex].length;
 
       empty();
+      
    }, 500);
   }
 });
@@ -641,6 +652,12 @@ setTimeout(() => {
      Input.focus();
      comment = currentComment.comment;
 
+     // When user presses Enter, treat as an updated comment
+     Enter.onclick = () => {
+     Input.style.height = "35px";
+     Input.style.border = "none";
+     Footer.style.height = "55px";
+
      // Remove the old comment temporarily
      videoData[currentVideoIndex].splice(x, 1);
 
@@ -650,11 +667,6 @@ setTimeout(() => {
      // ✅ Get the matching slide
      document.querySelectorAll(".video-carousel .video-slide")[currentVideoIndex].querySelector(".Icon.Comment span").innerHTML = videoData[currentVideoIndex].length;
 
-     // When user presses Enter, treat as an updated comment
-     Enter.onclick = () => {
-     Input.style.height = "35px";
-     Input.style.border = "none";
-     Footer.style.height = "55px";
 
      if (comment && comment.trim() !== "") {
      const updatedComment = {
@@ -662,7 +674,7 @@ setTimeout(() => {
              username: Username.innerHTML,
              comment: comment.trim(),
              isNew: true
-                    };
+      };
 
       // Add updated comment
       videoData[currentVideoIndex].splice(x, 0, updatedComment);
