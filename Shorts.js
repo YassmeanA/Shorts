@@ -821,7 +821,7 @@ carousel.addEventListener("touchmove", () => {
 carousel.addEventListener("touchend", () => {
     
 if (touchMoved) {
-setTimeout(() => {updateActiveSlide();}, 300);
+setTimeout(() => {updateActiveSlide();}, 100);
 }
 
 });
