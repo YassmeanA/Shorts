@@ -823,6 +823,7 @@ if (touchMoved) {
 setTimeout(() => {updateActiveSlide();}, 100);
 }
 
+  Back.innerHTML = carousel.scrollTop;
 });
 
 
