@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
- 
+
 <head>
 
     <meta charset="UTF-8">
@@ -33,17 +33,17 @@ justify-content:center;
 background:#0F0F0F;
 overflow:hidden;}
 
-.Body::-webkit-scrollbar, .comments-container::-webkit-scrollbar, .account-settings::-webkit-scrollbar {
+.Body::-webkit-scrollbar, .comments-container::-webkit-scrollbar, .account-settings::-webkit-scrollbar, .input::-webkit-scrollbar {
 display:flex;
 background:none;
 width:10px;}
 
-.Body.mouse::-webkit-scrollbar-thumb, .Body.mouse .comments-container::-webkit-scrollbar-thumb, .Body.mouse .account-settings::-webkit-scrollbar-thumb {
+.Body.mouse::-webkit-scrollbar-thumb, .Body.mouse .comments-container::-webkit-scrollbar-thumb, .Body.mouse .account-settings::-webkit-scrollbar-thumb, .Body.mouse .input::-webkit-scrollbar-thumb {
 background-color:rgba(255,255,255,0.2);
 width:10px;
 border-radius:5px;}
 
-.Body.touch::-webkit-scrollbar, .Body.touch .comments-container::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar {
+.Body.touch::-webkit-scrollbar, .Body.touch .comments-container::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar, .Body.touch .input::-webkit-scrollbar {
 display:none;}
 
 .Body {
@@ -1065,7 +1065,7 @@ cursor:pointer;}
 .camera:active {
 transform:scale(0.8);}
 
-.Profile {
+.Profile, .Profile-Edit {
 position:absolute;
 height:150px;
 width:150px;
@@ -1073,7 +1073,7 @@ border-radius:50%;
 border:1.5px solid #A3A3A3;
 object-fit:cover;}
 
-.page:nth-child(4) .Profile, .account-settings .wrapper {
+.Profile, .account-settings .wrapper {
 top:80px;}
 
 .account-info {
@@ -1273,7 +1273,7 @@ display:none;}
 
 .CoverImage {
 position:absolute;
-width:250px;
+width:100vw;
 height:250px;
 display:flex;
 align-items:center;
@@ -2361,7 +2361,7 @@ width:400px;}
 <div class="container">
 
 <div class="wrapper">
-<img class="Profile" src="Profile.jpg">
+<img class="Profile-Edit" src="Profile.jpg">
 <img class="camera" src="camera.jpg">
 </div>
 
