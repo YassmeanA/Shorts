@@ -789,8 +789,6 @@ const updateActiveSlide = () => {
     if (index === currentIndex) return;
 
     currentIndex = index;
-
-  Back.innerHTML = index;
   
 document.querySelectorAll(".video-carousel .video-slide video").forEach((Video,index) => {
   
