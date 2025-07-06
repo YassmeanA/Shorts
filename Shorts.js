@@ -787,7 +787,8 @@ const updateActiveSlide = () => {
     
     const index = Math.round(carousel.scrollTop / document.querySelectorAll(".video-slide")[0].offsetHeight);
     if (index === currentIndex) return;
-
+Back.innerHTML = index;
+  Back.style.color="white";
     currentIndex = index;
   
 document.querySelectorAll(".video-carousel .video-slide video").forEach((Video,index) => {
@@ -823,7 +824,6 @@ if (touchMoved) {
 setTimeout(() => {updateActiveSlide();}, 100);
 }
 
-  Back.innerHTML = carousel.scrollTop;
 });
 
 
