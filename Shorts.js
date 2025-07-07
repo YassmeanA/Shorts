@@ -796,7 +796,7 @@ const updateActiveSlide = () => {
     if (scrolledIndex === currentIndex) return;
 
     currentIndex = scrolledIndex;
-
+Back.innerHTML = scrolledIndex;
     // Stop all playback
     orderedSlides.forEach(slide => {
         const video = slide.querySelector("video");
@@ -839,9 +839,7 @@ carousel.addEventListener("touchend", () => {
 if (touchMoved) {
 setTimeout(() => {updateActiveSlide();}, 100);
 }
-  Back.style.background="blue"
-setTimeout(() => {Back.style.background="red"}, 100);
-  
+
 });
 
 
