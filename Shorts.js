@@ -783,44 +783,31 @@ function reorderSlides(selectedVideo) {
   }
 }
 
+
+// Active slide management
 const updateActiveSlide = () => {
-    const slideHeight = document.querySelector(".video-slide")?.offsetHeight;
-    if (!slideHeight) return;
+    
+    const index = Math.round(carousel.scrollTop / document.querySelectorAll(".video-slide")[0].offsetHeight);
+    if (index === currentIndex) return;
 
-    const scrolledIndex = Math.round(carousel.scrollTop / slideHeight);
-
-    // Sort slides visually using the `order` style
-    const orderedSlides = Array.from(document.querySelectorAll(".video-carousel .video-slide"))
-        .sort((a, b) => parseInt(a.style.order) - parseInt(b.style.order));
-
-    if (scrolledIndex === currentIndex) return;
-
-    currentIndex = scrolledIndex;
-Back.innerHTML = scrolledIndex;
-    // Stop all playback
-    orderedSlides.forEach(slide => {
-        const video = slide.querySelector("video");
-        const audio = slide.querySelector("audio");
-        if (video) {
-            video.pause();
-            video.currentTime = 0;
-        }
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-    });
-
-    // Play only the active one
-    const activeSlide = orderedSlides[scrolledIndex];
-    if (activeSlide) {
-        const video = activeSlide.querySelector("video");
-        const audio = activeSlide.querySelector("audio");
-        if (video) video.play();
-        if (audio) audio.play();
-    }
-};
+    currentIndex = index;
+Back.innerHTML = index;
   
+document.querySelectorAll(".video-carousel .video-slide video").forEach((Video,index) => {
+  
+Video.pause();
+Video.currentTime = 0;
+document.querySelectorAll(".video-carousel .video-slide audio")[index].pause();
+document.querySelectorAll(".video-carousel .video-slide audio")[index].currentTime = 0;
+
+});
+    
+if(document.querySelectorAll(".video-carousel .video-slide video")[index]){
+document.querySelectorAll(".video-carousel .video-slide video")[index].play();
+document.querySelectorAll(".video-carousel .video-slide audio")[index].play();
+};
+
+};
 
 
 // Handle touch move distance threshold
