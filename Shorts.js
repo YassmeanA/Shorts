@@ -785,9 +785,9 @@ function reorderSlides(selectedVideo) {
 
 
 // Active slide management
-const updateActiveSlide = () => {
+function updateActiveSlide() {
     
-    const index = Math.round(carousel.scrollTop / document.querySelectorAll(".video-slide")[0].offsetHeight);
+    let index = Math.round(carousel.scrollTop / window.innerHeight);
     if (index === currentIndex) return;
 
     currentIndex = index;
