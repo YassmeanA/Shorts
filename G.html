@@ -1,0 +1,120 @@
+
+let scrollTimeout;
+
+// ✅ Update active video/audio after scrolling ends
+const updateActiveSlide = () => {
+  const slides = document.querySelectorAll(".video-slide");
+  const index = Math.round(carousel.scrollTop / slides[0].offsetHeight);
+  if (index === currentIndex) return;
+
+  currentIndex = index;
+
+  // Pause all videos and audios
+  slides.forEach((slide) => {
+    const video = slide.querySelector("video");
+    const audio = slide.querySelector("audio");
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  });
+
+  // Play the current slide's media
+  const currentSlide = slides[index];
+  const video = currentSlide?.querySelector("video");
+  const audio = currentSlide?.querySelector("audio");
+
+  if (video) video.play();
+  if (audio) audio.play();
+};
+
+// ✅ Touch gesture detection
+let touchMoved = false;
+
+carousel.addEventListener("touchstart", () => {
+  touchMoved = false;
+});
+
+carousel.addEventListener("touchmove", () => {
+  touchMoved = true;
+});
+
+carousel.addEventListener("touchend", () => {
+  if (touchMoved) {
+    // Use debounce for scroll end detection
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      updateActiveSlide();
+    }, 150);
+  }
+});
+
+// ✅ Also trigger update when scroll ends (keyboard or momentum scroll)
+carousel.addEventListener("scroll", () => {
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => {
+    updateActiveSlide();
+  }, 150); // fires 150ms after scroll stops
+});
+
+
+let scrollTimeout;
+
+document.addEventListener("keydown", (e) => {
+  if (
+    !VideoWrapper.classList.contains("active") ||
+    VideoWrapper.classList.contains("Comments") ||
+    Body.classList.contains("touch")
+  ) return;
+
+  const slides = document.querySelectorAll(".video-slide");
+  const slideHeight = slides[0].offsetHeight;
+  let currentIndex = Math.round(carousel.scrollTop / slideHeight);
+
+  if (e.key === "ArrowDown") {
+    currentIndex = Math.min(currentIndex + 1, slides.length - 1);
+  } else if (e.key === "ArrowUp") {
+    currentIndex = Math.max(currentIndex - 1, 0);
+  } else {
+    return;
+  }
+
+  carousel.style.scrollBehavior = "smooth";
+  carousel.scrollTop = currentIndex * slideHeight;
+});
+
+// Detect when scrolling stops (debounced)
+carousel.addEventListener("scroll", () => {
+  clearTimeout(scrollTimeout);
+
+  scrollTimeout = setTimeout(() => {
+    const slides = document.querySelectorAll(".video-slide");
+    const slideHeight = slides[0].offsetHeight;
+    const index = Math.round(carousel.scrollTop / slideHeight);
+
+    // Pause all videos/audios
+    slides.forEach((slide, i) => {
+      const video = slide.querySelector("video");
+      const audio = slide.querySelector("audio");
+      if (video) {
+        video.pause();
+        video.currentTime = 0;
+      }
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+
+    // Play the current video/audio
+    const currentVideo = slides[index]?.querySelector("video");
+    const currentAudio = slides[index]?.querySelector("audio");
+
+    if (currentVideo) currentVideo.play();
+    if (currentAudio) currentAudio.play();
+  }, 150); // Trigger when scroll stops for 150ms
+});
