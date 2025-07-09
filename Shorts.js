@@ -916,7 +916,7 @@ document.addEventListener("keydown", (e) => {
         if (scrolledIndex === currentIndex) return;
     
         currentIndex = scrolledIndex;
-    Back.innerHTML = scrolledIndex;
+    
         // Stop all playback
         orderedSlides.forEach(slide => {
             const video = slide.querySelector("video");
