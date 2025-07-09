@@ -383,95 +383,61 @@ function slideButtons(Slide) {
 
 // Subscribe Btn
 Slide.querySelector(".Subscribe").addEventListener("click", () => {
-if (!Slide.querySelector(".Subscribe").classList.contains("active")) {
+  const classList = Slide.classList;
+  const channelMap = {
+    C1: { img: "TurkuazKitchen.jpg", name: "@TurkuazKitchen" },
+    C2: { img: "UTaste.jpg", name: "@U-Taste" },
+    C3: { img: "MissJophiel.jpg", name: "@MissJophiel" },
+    C4: { img: "MyArtShine.jpg", name: "@MyArtShine" }
+  };
 
-Slide.querySelector(".Subscribe").classList.add("active");
-Slide.querySelector(".Subscribe").innerHTML = "Subscribed";
+  // Detect which channel class the slide has (e.g., C1, C2, etc.)
+  let channelClass = null;
+  for (const key in channelMap) {
+    if (classList.contains(key)) {
+      channelClass = key;
+      break;
+    }
+  }
 
-const Sub = document.createElement("li");
-Sub.className = "sub";
+  if (!channelClass) return; // No valid channel class found
 
-if(Slide.classList.contains("C1")) {
+  // Skip if already subscribed (any one slide having it is enough)
+  const alreadySubscribed = document.querySelector(`.video-slide.${channelClass} .Subscribe.active`);
+  if (alreadySubscribed) return;
 
-  Sub.innerHTML = `
-  
-  <section class="Sub-Channel">
-
-  <img src="TurkuazKitchen.jpg">
-  <div class="sub-channel-title">
-  <span>@TurkuazKitchen</span>
-  </div>
-    
-  <button class="Sub-Subscribe">Subscribe</button>
-  </section>`;
-
-  
-};
-
-if(Slide.classList.contains("C2")){
-
-  Sub.innerHTML = `
-    
-  <section class="Sub-Channel">
-  
-  <img src="U-Taste.jpg">
-  <div class="sub-channel-title">
-  <span>@U-Taste</span>
-  </div>
-      
-  <button class="Sub-Subscribe">Subscribe</button>
-  </section>`;
-  
-};
-
-if(Slide.classList.contains("C3")){
-    
-  Sub.innerHTML = `
-      
-  <section class="Sub-Channel">
-    
-  <img src="MissJophiel.jpg">
-  <div class="sub-channel-title">
-  <span>@MissJophiel</span>
-  </div>
-        
-  <button class="Sub-Subscribe">Subscribe</button>
-  </section>`;
-    
-};
-
-if(Slide.classList.contains("C4")){
-      
-  Sub.innerHTML = `
-        
-  <section class="Sub-Channel">
-      
-  <img src="MyArtShine.jpg">
-  <div class="sub-channel-title">
-  <span>@MyArtShine</span>
-  </div>
-          
-  <button class="Sub-Subscribe">Subscribe</button>
-  </section>`;
-      
-};
-      
-  document.querySelector(".sub-list").appendChild(Sub);
-  Sub.querySelector(".Sub-Subscribe").innerHTML = "Unsubscribe";
-
-  Sub.querySelector(".Sub-Subscribe").addEventListener("click",() => {
-  Sub.remove();
-  HeightOfPage();
-  Slide.querySelector(".Subscribe").classList.remove("active");
-  Slide.querySelector(".Subscribe").innerHTML = "Subscribe";
-
+  // Mark all slides with this channel as subscribed
+  document.querySelectorAll(`.video-slide.${channelClass} .Subscribe`).forEach(btn => {
+    btn.classList.add("active");
+    btn.innerHTML = "Subscribed";
   });
 
-}
+  // Create and append the subscription list item
+  const { img, name } = channelMap[channelClass];
+  const Sub = document.createElement("li");
+  Sub.className = "sub";
+  Sub.innerHTML = `
+    <section class="Sub-Channel">
+      <img src="${img}">
+      <div class="sub-channel-title">
+        <span>${name}</span>
+      </div>
+      <button class="Sub-Subscribe">Unsubscribe</button>
+    </section>
+  `;
+  document.querySelector(".sub-list").appendChild(Sub);
 
-
-
+  // Unsubscribe handler
+  Sub.querySelector(".Sub-Subscribe").addEventListener("click", () => {
+    Sub.remove();
+    HeightOfPage();
+    document.querySelectorAll(`.video-slide.${channelClass} .Subscribe`).forEach(btn => {
+      btn.classList.remove("active");
+      btn.innerHTML = "Subscribe";
+    });
+  });
 });
+  
 
 Slide.querySelector(".Subscribe").style.left = `${Slide.querySelector(".channel-title span").offsetWidth + 40}px`;
 
