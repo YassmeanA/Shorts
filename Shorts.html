@@ -92,7 +92,6 @@ object-fit:cover;}
 
 .TopIcons {
 position:absolute;
-right:10px;
 width:130px;
 height:40px;
 list-style:none;
@@ -100,6 +99,12 @@ display:flex;
 gap:5px;
 align-items:center;
 justify-content:center;}
+
+.Body.mouse .TopIcons {
+right:18px;}
+
+.Body.touch .TopIcons {
+right:10px;}
 
 .TopIcon {
 width:40px;
@@ -747,6 +752,7 @@ background:rgba(255,255,255,0.1);}
 .Sub-Subscribe {
 height:35px;
 padding:0 14px;
+border-radius:17.5px;
 right:0;
 font-size:0.55rem}
 
