@@ -195,12 +195,21 @@ document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {Slid
 else {
 document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {Slide.querySelector("video").style.width = "100%";if(Slide.classList.contains("new")){Slide.querySelector("video").style.width ="100%";};});}
 
+let resizeTimeout;
+
 window.addEventListener("resize", () => {
 
+// Disable transitions immediately
 SubPages.forEach(SubPage => {
-SubPage.style.display="none";
-setTimeout(() => {SubPage.style.display="flex";},300);});
-  
+SubPage.style.transition = "none";});
+
+// Clear previous timeout and set a new one
+clearTimeout(resizeTimeout);
+resizeTimeout = setTimeout(() => {
+SubPages.forEach(SubPage => {
+SubPage.style.transition = "0.3s";});
+}, 300); // Delay after resize stops
+
 HeightOfPage();   
 
 if (window.innerWidth > 0.75 * window.innerHeight){
