@@ -516,12 +516,6 @@ Slide.querySelector(".Icon.Share").querySelector("span").innerHTML = shareNumber
 
 
 // (Play-Pause) Video & Audio
-document.addEventListener("keydown",(e) => {
-
-if(e.key === "Space"){Slide.querySelector("video").click();}
-  
-});
-  
 Slide.querySelector("video").onclick = () => {
 
 Slide.querySelector(".TB").classList.remove("active");
@@ -687,11 +681,6 @@ Enter.addEventListener("click", () => {
    
 });
 
-document.addEventListener("keydown",(e) => {
-
-if(e.key === "Enter"){Enter.click();}
-  
-});
 remove.addEventListener("click", () => {
 
 if (currentVideoIndex !== null && x !== undefined) {        
