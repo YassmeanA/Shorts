@@ -794,6 +794,8 @@ Back.addEventListener("click", () => {
   
 });
 
+let Index = 0;
+
 //Scroll Using Arrows
 document.addEventListener("keydown", (e) => {
 
@@ -807,18 +809,20 @@ if (slides.length === 0) return;
 
 // Adjust index
 if (e.key === "ArrowDown" || e.key === "Enter") {
-if (currentIndex < slides.length - 1) currentIndex++;
+if (Index < slides.length - 1) Index++;
 } else if (e.key === "ArrowUp") {
-if (currentIndex > 0) currentIndex--;
+if (Index > 0) Index--;
 } else {
 return; // Exit if not up/down/enter
 }
 
 // Smooth scroll
 carousel.style.scrollBehavior = "smooth";
-carousel.scrollTop = currentIndex * slideHeight;
+carousel.scrollTop = Index * slideHeight;
 
-  Back.innerHTML = currentIndex;
+  Back.innerHTML = Index;
+  Back.style.color="white";
+  
 // Sync playback after scroll
 setTimeout(() => {updateActiveSlide();},300);
 
