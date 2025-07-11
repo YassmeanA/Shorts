@@ -201,10 +201,10 @@ window.addEventListener("resize", () => {
 
 // Disable transitions immediately
 SubPages.forEach(SubPage => {
-SubPage.style.display = "none";});
-UploadVideo.style.display = "none";
-UploadAudio.style.display = "none";
-UploadCover.style.display = "none";
+if(!SubPage.classList.contains("active")){SubPage.style.display = "none";}});
+if(!UploadVideo.classList.contains("active")){UploadVideo.style.display = "none";}
+if(!UploadAudio.classList.contains("active")){UploadAudio.style.display = "none";}
+if(!UploadCover.classList.contains("active")){UploadCover.style.display = "none";}
   
 // Clear previous timeout and set a new one
 clearTimeout(resizeTimeout);
