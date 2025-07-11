@@ -201,13 +201,13 @@ window.addEventListener("resize", () => {
 
 // Disable transitions immediately
 SubPages.forEach(SubPage => {
-SubPage.style.transition = "none";});
+SubPage.style.display = "none";});
 
 // Clear previous timeout and set a new one
 clearTimeout(resizeTimeout);
 resizeTimeout = setTimeout(() => {
 SubPages.forEach(SubPage => {
-SubPage.style.transition = "0.3s";});
+SubPage.style.display = "flex";});
 }, 300); // Delay after resize stops
 
 HeightOfPage();   
@@ -933,8 +933,39 @@ setTimeout(() => {updateActiveSlide();},300);
   
   });
   
+ 
+// (Play-Pause) Video & Audio using Space
+document.addEventListener("keydown",(e) => {
+
+if (!VideoWrapper.classList.contains("active") || VideoWrapper.classList.contains("Comments") || Body.classList.contains("touch")) return;
   
+if (e.key === "Space") {
   
+const Slide = document.querySelectorAll(".video-carousel .video-slide")[currentVideoIndex];
+  
+Slide.querySelector(".TB").classList.remove("active");
+void Slide.querySelector(".TB").offsetWidth;
+Slide.querySelector(".TB").classList.add("active");
+
+if (Slide.querySelector("video").paused) {
+
+Slide.querySelector("video").play();
+Slide.querySelector("audio").play();
+Slide.querySelector(".play").style.display = "none";
+Slide.querySelector(".pause").style.display = "flex";
+
+} else {
+                
+Slide.querySelector(".video").pause();
+Slide.querySelector("audio").pause();         
+Slide.querySelector(".play").style.display = "flex";
+Slide.querySelector(".pause").style.display = "none";
+
+}
+  
+};
+                          
+});  
 
 Delete.addEventListener("click", () => {
 
