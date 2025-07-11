@@ -109,7 +109,7 @@ if(document.querySelectorAll(".sub-list li").length === 0){
   Pages[2].querySelector(".empty").style.display="none";
   Pages[2].style.height=`${List4.offsetHeight + 100}px`;};
 
-document.querySelector("account-edit").style.top="600px";
+document.querySelector(".account-edit").style.top="600px";
 Pages[3].style.height="650px";
   
 }
