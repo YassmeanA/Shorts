@@ -1388,7 +1388,7 @@ Save.style.display = "none"; // hide again
     setTimeout(() => {
       Alert.classList.remove("active");
     }, 1500);
-  }, 800);
+  }, 600);
 });
 
 
