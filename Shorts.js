@@ -92,8 +92,8 @@ else {Body.classList.add("mouse");Body.classList.remove("touch");}
 function HeightOfPage() {
 
 Body.scrollTop = 0;
-Title2.style.top=`${List1.offsetHeight + 140}px`;
-List2.style.top=`${List1.offsetHeight + 190}px`;
+Title2.style.top=`${List1.offsetHeight + 190}px`;
+List2.style.top=`${List1.offsetHeight + 240}px`;
 
 if(document.querySelectorAll(".list3 .item").length === 0){
 Pages[1].querySelector(".empty").style.display="flex";
