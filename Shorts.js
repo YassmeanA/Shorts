@@ -94,24 +94,16 @@ function HeightOfPage() {
 Body.scrollTop = 0;
 Title2.style.top=`${List1.offsetHeight + 140}px`;
 List2.style.top=`${List1.offsetHeight + 190}px`;
-Pages[0].style.height=`${List1.offsetHeight + List2.offsetHeight + 270}px`;
 
 if(document.querySelectorAll(".list3 .item").length === 0){
 Pages[1].querySelector(".empty").style.display="flex";
-Pages[1].style.height="calc(100vh - 110px)";
 }else{
-Pages[1].querySelector(".empty").style.display="none";
-Pages[1].style.height=`${List3.offsetHeight + 160}px`;};
+Pages[1].querySelector(".empty").style.display="none";};
 
 if(document.querySelectorAll(".sub-list li").length === 0){
   Pages[2].querySelector(".empty").style.display="flex";
-  Pages[2].style.height="calc(100vh - 110px)";
   }else{
-  Pages[2].querySelector(".empty").style.display="none";
-  Pages[2].style.height=`${List4.offsetHeight + 100}px`;};
-
-  Pages[3].style.height=`${AccountInfo.offsetHeight + 460}px`;
-  Edit.style.top=`${AccountInfo.offsetHeight + 400}px`;
+  Pages[2].querySelector(".empty").style.display="none";};
 
 }
 
@@ -257,7 +249,9 @@ icons.forEach(icon => {icon.classList.remove("active");});
 icons[index].classList.add("active");
 
 Pages.forEach(Page => {Page.classList.remove("active");});
+Pages[index].appendChild(document.querySelector("header"));
 Pages[index].classList.add("active");
+
 HeightOfPage();
 empty();
 
