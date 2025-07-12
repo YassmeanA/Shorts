@@ -95,9 +95,6 @@ List2.style.display="flex";
 
 function HeightOfPage() {
 
-Title2.style.top=`${List1.offsetHeight + 190}px`;
-List2.style.top=`${List1.offsetHeight + 240}px`;
-
 }
 
 
