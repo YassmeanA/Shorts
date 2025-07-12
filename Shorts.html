@@ -33,17 +33,17 @@ justify-content:center;
 background:#0F0F0F;
 overflow:hidden;}
 
-.Body::-webkit-scrollbar, .comments-container::-webkit-scrollbar, .account-settings::-webkit-scrollbar, .input::-webkit-scrollbar {
+.Body::-webkit-scrollbar, .page::-webkit-scrollbar, .comments-container::-webkit-scrollbar, .account-settings::-webkit-scrollbar, .input::-webkit-scrollbar {
 display:flex;
 background:none;
 width:10px;}
 
-.Body.mouse::-webkit-scrollbar-thumb, .Body.mouse .comments-container::-webkit-scrollbar-thumb, .Body.mouse .account-settings::-webkit-scrollbar-thumb, .Body.mouse .input::-webkit-scrollbar-thumb {
+.Body.mouse::-webkit-scrollbar-thumb, .Body.mouse .page::-webkit-scrollbar-thumb, .Body.mouse .comments-container::-webkit-scrollbar-thumb, .Body.mouse .account-settings::-webkit-scrollbar-thumb, .Body.mouse .input::-webkit-scrollbar-thumb {
 background-color:rgba(255,255,255,0.2);
 width:10px;
 border-radius:5px;}
 
-.Body.touch::-webkit-scrollbar, .Body.touch .comments-container::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar, .Body.touch .input::-webkit-scrollbar {
+.Body.touch::-webkit-scrollbar, .Body.touch .page::-webkit-scrollbar, .Body.touch .comments-container::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar, .Body.touch .input::-webkit-scrollbar {
 display:none;}
 
 .Body {
@@ -61,7 +61,7 @@ overflow-y:auto;}
 position:fixed;
 top:0;
 width:100%;
-height:calc(100% - 110px);
+height:calc(100% - 60px);
 align-items:center;
 justify-content:center;
 overflow-x:hidden;
@@ -734,7 +734,8 @@ bottom:60px;}
 
 .account-edit {
 height:40px;
-right:20px;}
+right:20px;
+bottom:20px;}
 
 .account-save {
 display:none;}
