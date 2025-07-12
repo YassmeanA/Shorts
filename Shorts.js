@@ -56,6 +56,7 @@ const ITEM = document.querySelector(".Item");
 const DeleteV = document.querySelector(".deleteV");
 const Edit = document.querySelector(".account-edit");
 const Save = document.querySelector(".account-save");
+const AccountInfo = document.querySelector(".page:nth-child(4) .account-info");
 
 
 let videoData = [
@@ -108,7 +109,10 @@ if(document.querySelectorAll(".sub-list li").length === 0){
   }else{
   Pages[2].querySelector(".empty").style.display="none";
   Pages[2].style.height=`${List4.offsetHeight + 100}px`;};
-  
+
+  Pages[3].style.height=`${AccountInfo.offsetHeight + 460}px`;
+  Edit.style.top=`${AccountInfo.offsetHeight + 400}px`;
+
 }
 
 
