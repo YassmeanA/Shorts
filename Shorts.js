@@ -93,14 +93,10 @@ List2.style.top=`${List1.offsetHeight + 240}px`;
 Title2.style.display="flex";
 List2.style.display="flex";
 
-function HeightOfPage() {
-
-}
-
 
 function empty() {
 
-if(document.querySelectorAll(".list1 .item").length === 0){List1.querySelector(".empty").style.display="flex";List1.style.height="240px";}else{List1.querySelector(".empty").style.display="none";};
+if(document.querySelectorAll(".list1 .item").length === 0){List1.querySelector(".empty").style.display="flex";}else{List1.querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".list2 .item").length === 0){List2.querySelector(".empty").style.display="flex";}else{List2.querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".list3 .item").length === 0){Pages[1].querySelector(".empty").style.display="flex";}else{Pages[1].querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".sub-list li").length === 0){Pages[2].querySelector(".empty").style.display="flex";}else{Pages[2].querySelector(".empty").style.display="none";};
@@ -201,7 +197,8 @@ UploadAudio.style.display = "flex";
 UploadCover.style.display = "flex";
 }, 300); // Delay after resize stops
 
-HeightOfPage();   
+Title2.style.top=`${List1.offsetHeight + 190}px`;
+List2.style.top=`${List1.offsetHeight + 240}px`;   
 
 if (window.innerWidth > 0.75 * window.innerHeight){
 document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {Slide.querySelector("video").style.width = "auto";if(Slide.classList.contains("new")){Slide.querySelector("video").style.width = "56vh";};});}
@@ -944,7 +941,6 @@ setTimeout(() => {
      
       // Cleanup & reload
       empty();
-      HeightOfPage();
       load();
       
     }
@@ -1232,7 +1228,6 @@ Slide.querySelector(".video-info").innerHTML += `
 
   slideButtons(Slide);
   load();
-  HeightOfPage();
   empty();
 
   NumOfVideos++;
