@@ -96,7 +96,7 @@ List2.style.display="flex";
 
 function empty() {
 
-if(document.querySelectorAll(".list1 .item").length === 0){List1.querySelector(".empty").style.display="flex";}else{List1.querySelector(".empty").style.display="none";};
+if(document.querySelectorAll(".list1 .item").length === 0){List1.querySelector(".empty").style.display="flex";List1.style.height="240px";}else{List1.querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".list2 .item").length === 0){List2.querySelector(".empty").style.display="flex";}else{List2.querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".list3 .item").length === 0){Pages[1].querySelector(".empty").style.display="flex";}else{Pages[1].querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".sub-list li").length === 0){Pages[2].querySelector(".empty").style.display="flex";}else{Pages[2].querySelector(".empty").style.display="none";};
