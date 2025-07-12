@@ -196,9 +196,7 @@ UploadVideo.style.display = "flex";
 UploadAudio.style.display = "flex";
 UploadCover.style.display = "flex";
 }, 300); // Delay after resize stops
-
-Title2.style.top=`${List1.offsetHeight + 190}px`;
-List2.style.top=`${List1.offsetHeight + 240}px`;   
+  
 
 if (window.innerWidth > 0.75 * window.innerHeight){
 document.querySelectorAll(".video-carousel .video-slide").forEach(Slide => {Slide.querySelector("video").style.width = "auto";if(Slide.classList.contains("new")){Slide.querySelector("video").style.width = "56vh";};});}
@@ -217,14 +215,21 @@ Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
 Footer.style.height=`${Input.offsetHeight + 20}px`;
 if(Input.offsetHeight >= 80){Input.style.border="10px solid #272727";}else{Input.style.border="none";};
 
+if (VideoWrapper.classList.contains("active") || Array.from(SubPages).some(SubPage => SubPage.classList.contains("active"))) return;
+
+Title2.style.top = `${List1.offsetHeight + 190}px`;
+List2.style.top = `${List1.offsetHeight + 240}px`;
+  
 });
 
 
 Background.addEventListener("click", () => {
 
 Settings.classList.remove("active");
-if(VideoWrapper.classList.contains("active")){Body.style.overflowY="hidden";}else{Body.style.overflowY="auto";};
+Pages.forEach(Page => {
+if(VideoWrapper.classList.contains("active")){Page.style.overflowY="hidden";}else{Page.style.overflowY="auto";};
 
+});
 });
 
 
@@ -273,7 +278,9 @@ setTimeout(() => {
 Settings.classList.remove("active");
 Option.querySelector(".circle").classList.remove("active");
 
-if(VideoWrapper.classList.contains("active")){Body.style.overflowY="hidden";}else{Body.style.overflowY="auto";};
+Pages.forEach(Page => {
+if(VideoWrapper.classList.contains("active")){Page.style.overflowY="hidden";}else{Page.style.overflowY="auto";};
+});
 
 }, 500);
 
@@ -294,11 +301,9 @@ TopIcon.querySelector(".circle").classList.remove("active");
 SubBtns.forEach((SubBtn,index) => {
 SubBtn.addEventListener("click", () => {
 
-
-
 setTimeout(() => {
 SubPages[index].classList.add("active");
-setTimeout(() => {Body.style.overflowY="hidden";},300);
+setTimeout(() => {Pages.forEach(Page => {Page.style.overflowY="hidden";});},300);
 },500);
 
 });
@@ -340,7 +345,9 @@ back.addEventListener("click", () => {
 SubPages.forEach(SubPage => {
 SubPage.classList.remove("active");});
 
-if(VideoWrapper.classList.contains("active")){Body.style.overflowY="hidden";}else{Body.style.overflowY="auto";};
+Pages.forEach(Page => {
+if(VideoWrapper.classList.contains("active")){Page.style.overflowY="hidden";}else{Page.style.overflowY="auto";};
+});
 
 });
 });
