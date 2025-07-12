@@ -88,13 +88,15 @@ if ("ontouchstart" in document.documentElement)
 
 else {Body.classList.add("mouse");Body.classList.remove("touch");}
 
+Title2.style.top=`${List1.offsetHeight + 190}px`;
+List2.style.top=`${List1.offsetHeight + 240}px`;
+Title2.style.display="flex";
+List2.style.display="flex";
 
 function HeightOfPage() {
 
 Title2.style.top=`${List1.offsetHeight + 190}px`;
 List2.style.top=`${List1.offsetHeight + 240}px`;
-Title2.style.display="flex";
-List2.style.display="flex";
 
 }
 
@@ -108,10 +110,7 @@ if(document.querySelectorAll(".sub-list li").length === 0){Pages[2].querySelecto
 
 }
 
-
-HeightOfPage();
 empty();
-
 
 function Comments(index) {
   
