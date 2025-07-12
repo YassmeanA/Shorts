@@ -56,7 +56,6 @@ const ITEM = document.querySelector(".Item");
 const DeleteV = document.querySelector(".deleteV");
 const Edit = document.querySelector(".account-edit");
 const Save = document.querySelector(".account-save");
-const AccountInfo = document.querySelector(".AccountInfo");
 
 
 let videoData = [
@@ -89,11 +88,12 @@ if ("ontouchstart" in document.documentElement)
 
 else {Body.classList.add("mouse");Body.classList.remove("touch");}
 
-Title2.style.top=`${List1.offsetHeight + 190}px`;
-List2.style.top=`${List1.offsetHeight + 240}px`;
 
 function HeightOfPage() {
 
+Title2.style.top=`${List1.offsetHeight + 190}px`;
+List2.style.top=`${List1.offsetHeight + 240}px`;
+  
 if(document.querySelectorAll(".list3 .item").length === 0){
 Pages[1].querySelector(".empty").style.display="flex";
 }else{
