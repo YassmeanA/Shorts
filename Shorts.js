@@ -56,7 +56,7 @@ const ITEM = document.querySelector(".Item");
 const DeleteV = document.querySelector(".deleteV");
 const Edit = document.querySelector(".account-edit");
 const Save = document.querySelector(".account-save");
-const AccountInfo = document.querySelector(".AccounInfo");
+const AccountInfo = document.querySelector(".AccountInfo");
 
 
 let videoData = [
