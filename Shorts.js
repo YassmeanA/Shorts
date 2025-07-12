@@ -969,7 +969,9 @@ Add.addEventListener("click", () => {
   currentCover = "";
   musicTitle = "";
   videoTitle = "";
-  setTimeout(() => { UploadVideo.classList.add("active"); }, 200);
+  setTimeout(() => {
+  UploadVideo.classList.add("active");
+  Pages.forEach(Page => {Page.style.overflowY="hidden";});}, 200);
 });
 
 UploadVideo.querySelector(".back").addEventListener("click", () => {
@@ -1278,6 +1280,8 @@ Slide.querySelector(".video-info").innerHTML += `
 
   Finish.style.display = "none";
   Finish.style.pointerEvents="auto";
+  Pages.forEach(Page => {Page.style.overflowY="auto";});
+    
   },600);
                     
 });
@@ -1364,7 +1368,7 @@ Save.style.display = "none"; // hide again
   document.querySelector(".Email h3").innerHTML = emailInput.value;
   document.querySelector(".YourChannel h3").innerHTML = channelInput.value;
   Avatar.src = profileEditImg.src;
-  Body.style.overflowY = "auto";
+  Pages.forEach(Page => {Page.style.overflowY="auto";});
 
   // Reset originals
   originalImg = profileEditImg.src;
