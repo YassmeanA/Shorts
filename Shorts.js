@@ -93,16 +93,7 @@ function HeightOfPage() {
 
 Title2.style.top=`${List1.offsetHeight + 190}px`;
 List2.style.top=`${List1.offsetHeight + 240}px`;
-  
-if(document.querySelectorAll(".list3 .item").length === 0){
-Pages[1].querySelector(".empty").style.display="flex";
-}else{
-Pages[1].querySelector(".empty").style.display="none";};
-
-if(document.querySelectorAll(".sub-list li").length === 0){
-  Pages[2].querySelector(".empty").style.display="flex";
-  }else{
-  Pages[2].querySelector(".empty").style.display="none";};
+List2.style.display="flex";
 
 }
 
@@ -111,6 +102,8 @@ function empty() {
 
 if(document.querySelectorAll(".list1 .item").length === 0){List1.querySelector(".empty").style.display="flex";List1.style.height="240px";}else{List1.querySelector(".empty").style.display="none";};
 if(document.querySelectorAll(".list2 .item").length === 0){List2.querySelector(".empty").style.display="flex";}else{List2.querySelector(".empty").style.display="none";};
+if(document.querySelectorAll(".list3 .item").length === 0){Pages[1].querySelector(".empty").style.display="flex";}else{Pages[1].querySelector(".empty").style.display="none";};
+if(document.querySelectorAll(".sub-list li").length === 0){Pages[2].querySelector(".empty").style.display="flex";}else{Pages[2].querySelector(".empty").style.display="none";};
 
 }
 
@@ -251,7 +244,6 @@ Pages.forEach(Page => {Page.classList.remove("active");});
 Pages[index].appendChild(document.querySelector("header"));
 Pages[index].classList.add("active");
 
-HeightOfPage();
 empty();
 
 });
@@ -1305,6 +1297,8 @@ let originalImg = document.querySelector(".Profile").src;
 let originalUsername = document.querySelector(".Username h3").innerHTML;
 let originalEmail = document.querySelector(".Email h3").innerHTML;
 let originalChannel = document.querySelector(".YourChannel h3").innerHTML;
+
+Avatar.src = originalImg;
 
 // Set inputs with current values
 const profileEditImg = document.querySelector(".account-settings .wrapper .Profile-Edit");
