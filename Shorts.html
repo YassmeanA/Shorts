@@ -130,7 +130,6 @@ object-fit:cover;}
 #BottomNavbar {
 position:fixed;
 bottom:0;
-left:0;
 width:100vw;
 height:60px;
 outline:0.5px solid #666666;
@@ -1065,6 +1064,15 @@ box-shadow:-5px 5px 10px rgba(0,0,0,0.2);}
 .alert.active {
 opacity:1;}
 
+.Content {
+position:absolute;
+top:50px;
+height:650px;
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;}
+    
 .account-settings .wrapper {
 position:absolute;
 height:150px;
@@ -1409,34 +1417,8 @@ width:400px;}
 
 <div class="Body">
 
-<div class="page active">
+<div class="page active" style="padding-bottom:20px;">>
 
-
-<header class="header">
-
-<ul class="TopIcons">
-
-<li class="TopIcon sub-btn">
-<div class="circle"></div>
-<img src="screen-share.svg">
-</li>
-
-<li class="TopIcon sub-btn">
-<div class="circle"></div>
-<img src="notifications.svg">
-</li>
-
-<li class="TopIcon sub-btn">
-<div class="circle"></div>
-<img src="search.svg">
-</li>
-
-</ul>
-
-<img src="youtube.svg" class="logo">
-
-</header>
-    
 <div class="shorts">
 <img class="icon" src="shorts.svg">
 <span class="title1">Shorts</span>
@@ -1576,9 +1558,36 @@ width:400px;}
 
 </ul>
 
+
+<header class="header">
+
+<ul class="TopIcons">
+
+<li class="TopIcon sub-btn">
+<div class="circle"></div>
+<img src="screen-share.svg">
+</li>
+
+<li class="TopIcon sub-btn">
+<div class="circle"></div>
+<img src="notifications.svg">
+</li>
+
+<li class="TopIcon sub-btn">
+<div class="circle"></div>
+<img src="search.svg">
+</li>
+
+</ul>
+
+<img src="youtube.svg" class="logo">
+
+</header>
+
+
 </div>
 
-<div class="page">
+<div class="page" style="padding-bottom:20px;">
 
 <span class="title3">Your Shorts</span>
 <p class="empty">There are no videos</p>
@@ -1589,7 +1598,7 @@ width:400px;}
 
 </div>
 
-<div class="page">
+<div class="page"  style="padding-bottom:20px;">>
 
 <p class="empty">No subscriptions yet</p>
 
@@ -1599,9 +1608,11 @@ width:400px;}
 
 <div class="page">
 
+<div class="Content">
+    
 <img class="Profile" src="Profile.jpg">
 
-<ul class="account-info AccountInfo">
+<ul class="account-info">
 
 <li class="Username">
 
@@ -1628,6 +1639,8 @@ width:400px;}
 
 <button class="sub-btn account-edit">Edit</button>
 
+</div>
+    
 </div>
 
 <div id="BottomNavbar">
