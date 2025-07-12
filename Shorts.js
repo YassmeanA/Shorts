@@ -93,6 +93,7 @@ function HeightOfPage() {
 
 Title2.style.top=`${List1.offsetHeight + 190}px`;
 List2.style.top=`${List1.offsetHeight + 240}px`;
+Title2.style.display="flex";
 List2.style.display="flex";
 
 }
@@ -445,7 +446,7 @@ Slide.querySelector(".Subscribe").addEventListener("click", () => {
   // Unsubscribe handler
   Sub.querySelector(".Sub-Subscribe").addEventListener("click", () => {
     Sub.remove();
-    HeightOfPage();
+    empty();
     document.querySelectorAll(`.video-slide.${channelClass} .Subscribe`).forEach(btn => {
       btn.classList.remove("active");
       btn.innerHTML = "Subscribe";
