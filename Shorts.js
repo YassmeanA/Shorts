@@ -79,28 +79,10 @@ let countB;
 let currentIndex = 0;
 let currentVideoIndex = null;
 
+
 //Remove loading animation after the page is full loaded
-let loaded = 0;
-const total = document.querySelectorAll(".item").length;
-
-document.querySelectorAll(".item").forEach(Item => {
-  const onLoad = () => {
-    loaded++;
-    if (loaded === total) {setTimeout(() => {document.querySelector(".Loader").remove();},500);};
-  };
-
-  if ((Item.tagName === "IMG" && Item.complete) ||
-      (Item.tagName === "VIDEO" && Item.readyState >= 3)) {
-    onLoad(); // Already loaded
-  } else {
-    if (Item.tagName === "VIDEO") {
-      Item.addEventListener("loadeddata", onLoad);
-    } else {
-      Item.addEventListener("load", onLoad);
-    }
-  }
-});
-
+window.addEventListener("load",() => {
+setTimeout(() => {document.querySelector(".Loader").remove();},500);});
 
 //Check if the user uses touchscreen or not
 if ("ontouchstart" in document.documentElement)
