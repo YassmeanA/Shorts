@@ -80,7 +80,7 @@ let currentIndex = 0;
 let currentVideoIndex = null;
 
 
-//Remove loading animation after the page is full loaded
+//Remove loading animation after the page is fully loaded
 window.addEventListener("load",() => {
 setTimeout(() => {document.querySelector(".Loader").remove();},500);});
 
