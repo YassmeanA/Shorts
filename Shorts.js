@@ -79,10 +79,12 @@ let countB;
 let currentIndex = 0;
 let currentVideoIndex = null;
 
+setTimeout(() => {Pages[0].style.opacity = '1';},1000);
 
 //Remove loading animation after the page is fully loaded
-window.addEventListener("load",() => {
-setTimeout(() => {document.querySelector(".Loader").remove();},500);});
+window.addEventListener('load', () => {
+setTimeout(() => {document.querySelector('.Loader').style.display = 'none';},1000);
+});
 
 //Check if the user uses touchscreen or not
 if ("ontouchstart" in document.documentElement)
