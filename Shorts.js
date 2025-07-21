@@ -220,7 +220,7 @@ Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
 Footer.style.height=`${Input.offsetHeight + 20}px`;
 if(Input.offsetHeight >= 80){Input.style.border="10px solid #272727";}else{Input.style.border="none";};
 
-if (VideoWrapper.classList.contains("active") || Array.from(SubPages).some(SubPage => SubPage.classList.contains("active"))) return;
+if (VideoWrapper.classList.contains("active") || Array.from(SubPages).some(SubPage => SubPage.classList.contains("active")) || UploadVideo.classList.contains("active") || UploadAudio.classList.contains("active") || UploadCover.classList.contains("active")) return;
 
 Title2.style.top = `${List1.offsetHeight + 190}px`;
 List2.style.top = `${List1.offsetHeight + 240}px`;
