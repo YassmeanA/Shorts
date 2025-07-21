@@ -82,7 +82,7 @@ let currentVideoIndex = null;
 setTimeout(() => {Pages[0].style.opacity = '1';},1000);
 
 //Remove loading animation after the page is fully loaded
-window.addEventListener('loadedmetadata', () => {
+window.addEventListener('load', () => {
 setTimeout(() => {document.querySelector('.Loader').style.display = 'none';},1000);
 });
 
