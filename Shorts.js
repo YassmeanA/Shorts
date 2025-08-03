@@ -1,6 +1,5 @@
 
 const Body = document.querySelector(".Body");
-const BottomNavbar = document.querySelector("#BottomNavbar");
 const VideoWrapper = document.querySelector(".video-wrapper");
 const VideoContainer = document.querySelector(".video-container");
 const Back = document.querySelector(".Back");
@@ -80,7 +79,7 @@ let countB;
 let currentIndex = 0;
 let currentVideoIndex = null;
 
-setTimeout(() => {Pages[0].style.opacity = '1';BottomNavbar.style.opacity = '1';},1000);
+setTimeout(() => {Body.style.opacity = '1';},1000);
 
 //Remove loading animation after the page is fully loaded
 Pages[0].addEventListener('load', () => {
@@ -1396,6 +1395,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
