@@ -79,8 +79,6 @@ let countB;
 let currentIndex = 0;
 let currentVideoIndex = null;
 
-setTimeout(() => {Body.style.opacity = '1';},1000);
-
 //Remove loading animation after the page is fully loaded
 Pages[0].addEventListener('load', () => {
 setTimeout(() => {document.querySelector('.Loader').style.display = 'none';},1000);
@@ -1395,6 +1393,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
