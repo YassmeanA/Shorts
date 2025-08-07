@@ -82,9 +82,9 @@ let currentVideoIndex = null;
 setTimeout(() => {Pages[0].style.opacity = '1';},1000);
 
 //Remove loading animation after the page is fully loaded
-window.addEventListener('load', () => {
+//window.addEventListener('load', () => {
 setTimeout(() => {document.querySelector('.Loader').style.display = 'none';},1000);
-});
+//});
 
 //Check if the user uses touchscreen or not
 if ("ontouchstart" in document.documentElement)
@@ -1395,6 +1395,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
