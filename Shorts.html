@@ -38,12 +38,12 @@ display:flex;
 background:none;
 width:10px;}
 
-.Body.mouse::-webkit-scrollbar-thumb, .Body.mouse .page::-webkit-scrollbar-thumb, .Body.mouse .comments-container::-webkit-scrollbar-thumb, .Body.mouse .account-settings::-webkit-scrollbar-thumb, .Body.mouse .input::-webkit-scrollbar-thumb, .Body.mouse .UploadAudio::-webkit-scrollbar-thumb, .Body.mouse .UploadVideo::-webkit-scrollbar-thumb {
+.Body.mouse::-webkit-scrollbar-thumb, .Body.mouse .page::-webkit-scrollbar-thumb, .Body.mouse .comments-container::-webkit-scrollbar-thumb, .Body.mouse .account-settings::-webkit-scrollbar-thumb, .Body.mouse .input::-webkit-scrollbar-thumb, .Body.mouse .UploadAudio::-webkit-scrollbar-thumb, .Body.mouse .UploadCover::-webkit-scrollbar-thumb {
 background-color:rgba(255,255,255,0.2);
 width:10px;
 border-radius:5px;}
 
-.Body.touch::-webkit-scrollbar, .Body.touch .page::-webkit-scrollbar, .Body.touch .comments-container::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar, .Body.touch .input::-webkit-scrollbar, .Body.touch .UploadAudio::-webkit-scrollbar, .Body.touch .UploadVideo::-webkit-scrollbar {
+.Body.touch::-webkit-scrollbar, .Body.touch .page::-webkit-scrollbar, .Body.touch .comments-container::-webkit-scrollbar, .Body.touch .account-settings::-webkit-scrollbar, .Body.touch .input::-webkit-scrollbar, .Body.touch .UploadAudio::-webkit-scrollbar, .Body.touch .UploadCover::-webkit-scrollbar {
 display:none;}
 
 .Body {
@@ -1187,7 +1187,8 @@ top:0;
 left:-100vw;
 width:100%;
 height:100%;
-overflow:hidden;
+overflow-x:hidden;
+overflow-y:hidden;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -1242,7 +1243,7 @@ transform:scale(1);}
 .cover-container {
 position:absolute;
 top:100px;
-width:100vw;
+width:90vw;
 height:100px;
 display:none;
 align-items:center;
@@ -1342,7 +1343,7 @@ display:none;}
 
 .CoverImage {
 position:absolute;
-width:100vw;
+width:90vw;
 height:250px;
 display:flex;
 align-items:center;
