@@ -1203,8 +1203,7 @@ height:100%;
 overflow:hidden;
 display:flex;
 align-items:center;
-justify-content:center;
-background:red;}
+justify-content:center;}
 
 .UploadVideo.active, .UploadAudio.active, .UploadCover.active {
 left:0;}
@@ -1467,16 +1466,23 @@ width:400px;}
 
 @media screen and (max-height:500px) {
 
+.UploadAudio .upload-content {
+height:400px;}
+
+.UploadCover .upload-content {
+height:500px;}
+    
 .UploadAudio, .UploadCover {
-height:500px;
 overflow-y:auto;}
 
 }
 
 @media screen and (min-height:500px) {
 
+.UploadAudio .upload-content, .UploadCover .upload-content {
+height:100%;}
+    
 .UploadAudio, .UploadCover {
-height:100%;
 overflow-y:hidden;}
 
 }
