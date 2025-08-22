@@ -84,7 +84,7 @@ setTimeout(() => {Pages[0].style.opacity = '1';},1000);
 
 //Remove loading animation after the page is fully loaded
 //window.addEventListener('load', () => {
-setTimeout(() => {document.querySelector('.Loader').style.display = 'none';},1000);
+setTimeout(() => {document.querySelector('.Loader').style.display = 'none';Body.style.opacity = "1";},1000);
 //});
 
 //Check if the user uses touchscreen or not
@@ -1401,6 +1401,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
