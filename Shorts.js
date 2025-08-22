@@ -675,7 +675,6 @@ Enter.addEventListener("click", () => {
     Input.style.height = "35px"; // Reset height
     Input.style.border="none";
     Footer.style.height = "55px"; 
-    document.querySelector(".comments-container").scrollTop = SP;
     if (comment && comment.trim() !== "" && currentVideoIndex !== null) {
         const newComment = {
             avatar: Profile.src,
@@ -695,7 +694,7 @@ Enter.addEventListener("click", () => {
         comment = "";
         empty();
     }
-   
+   document.querySelector(".comments-container").scrollTop = SP;
 });
 
 remove.addEventListener("click", () => {
@@ -738,7 +737,7 @@ setTimeout(() => {
      Input.style.height = "35px";
      Input.style.border = "none";
      Footer.style.height = "55px";
-     document.querySelector(".comments-container").scrollTop = SP;
+     
      // Remove the old comment temporarily
      videoData[currentVideoIndex].splice(x, 1);
 
@@ -774,7 +773,7 @@ setTimeout(() => {
        }
      };
    }
-  
+  document.querySelector(".comments-container").scrollTop = SP;
 }, 500);
 });
 
@@ -1399,6 +1398,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
