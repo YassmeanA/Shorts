@@ -269,7 +269,7 @@ Input.addEventListener("input", () => {
    Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
    Footer.style.height=`${Input.offsetHeight + 20}px`;
    if(Input.offsetHeight >= 80){Input.style.border="10px solid #272727";}else{Input.style.border="none";};
-   SP = document.querySelector("comments-container").scrollTop;
+   SP = document.querySelector(".comments-container").scrollTop;
  comment = Input.value;
 });
 
@@ -675,7 +675,7 @@ Enter.addEventListener("click", () => {
     Input.style.height = "35px"; // Reset height
     Input.style.border="none";
     Footer.style.height = "55px"; 
-    document.querySelector("comments-container").scrollTop = SP;
+    document.querySelector(".comments-container").scrollTop = SP;
     if (comment && comment.trim() !== "" && currentVideoIndex !== null) {
         const newComment = {
             avatar: Profile.src,
@@ -1122,7 +1122,7 @@ imageInput.addEventListener("change", () => {
     UploadAudio.querySelector(".circle2").style.display = "none";
     UploadAudio.querySelector(".text1").style.display = "none";
     MusicCover.style.pointerEvents = "none";
-    UploadAudio.classlist.add("expand");
+    UploadAudio.classList.add("expand");
   }
 });
 
@@ -1135,7 +1135,7 @@ UploadAudio.querySelector(".next").addEventListener("click", () => {
 
   UploadAudio.classList.remove("active");
   UploadCover.classList.add("active");
-  UploadAudio.classlist.remove("expand");
+  UploadAudio.classList.remove("expand");
   
   if (Skip.classList.contains("active")) return;
 
@@ -1399,6 +1399,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
