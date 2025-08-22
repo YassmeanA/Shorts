@@ -769,11 +769,11 @@ setTimeout(() => {
 
       // Restore Enter button behavior
       Enter.onclick = defaultEnterHandler;
-       
+      document.querySelector(".comments-container").scrollTop = SP;
        }
      };
    }
-  document.querySelector(".comments-container").scrollTop = SP;
+
 }, 500);
 });
 
@@ -1398,6 +1398,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
