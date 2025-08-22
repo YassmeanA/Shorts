@@ -78,6 +78,7 @@ let countA;
 let countB;
 let currentIndex = 0;
 let currentVideoIndex = null;
+let SP = 0;
 
 setTimeout(() => {Pages[0].style.opacity = '1';},1000);
 
@@ -258,11 +259,9 @@ Cross.addEventListener("click", () => {
 
 setTimeout(() => {
 VideoWrapper.classList.remove("Comments");},300);
-
 VideoWrapper.classList.remove("comments");
 
 });
-
 
 Input.addEventListener("input", () => {
    
@@ -270,7 +269,7 @@ Input.addEventListener("input", () => {
    Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
    Footer.style.height=`${Input.offsetHeight + 20}px`;
    if(Input.offsetHeight >= 80){Input.style.border="10px solid #272727";}else{Input.style.border="none";};
-
+   SP = document.querySelector("comments-container").scrollTop;
  comment = Input.value;
 });
 
@@ -621,7 +620,8 @@ document.querySelectorAll(".item").forEach(Item => {
     carousel.scrollTop = 0;
 
     // Prevent body scroll
-    Body.style.overflowY = "hidden";
+    Pages.forEach(Page => {
+    Page.style.overflowY = "hidden";});
 
     // Show video player
     VideoWrapper.classList.add("active");
@@ -675,6 +675,7 @@ Enter.addEventListener("click", () => {
     Input.style.height = "35px"; // Reset height
     Input.style.border="none";
     Footer.style.height = "55px"; 
+    document.querySelector("comments-container").scrollTop = SP;
     if (comment && comment.trim() !== "" && currentVideoIndex !== null) {
         const newComment = {
             avatar: Profile.src,
@@ -737,7 +738,7 @@ setTimeout(() => {
      Input.style.height = "35px";
      Input.style.border = "none";
      Footer.style.height = "55px";
-
+     document.querySelector(".comments-container").scrollTop = SP;
      // Remove the old comment temporarily
      videoData[currentVideoIndex].splice(x, 1);
 
@@ -797,7 +798,8 @@ Back.addEventListener("click", () => {
   setTimeout(() => {
   carousel.scrollTop = 0;
   VideoWrapper.classList.remove("active");
-  Body.style.overflowY="auto";
+  Pages.forEach(Page => {
+  Page.style.overflowY="auto";});
   document.querySelectorAll(".video-carousel .video-slide video").forEach((Video,index) => {
   Video.pause();
   Video.currentTime = 0;
@@ -1120,6 +1122,7 @@ imageInput.addEventListener("change", () => {
     UploadAudio.querySelector(".circle2").style.display = "none";
     UploadAudio.querySelector(".text1").style.display = "none";
     MusicCover.style.pointerEvents = "none";
+    UploadAudio.classlist.add("expand");
   }
 });
 
@@ -1132,7 +1135,8 @@ UploadAudio.querySelector(".next").addEventListener("click", () => {
 
   UploadAudio.classList.remove("active");
   UploadCover.classList.add("active");
-
+  UploadAudio.classlist.remove("expand");
+  
   if (Skip.classList.contains("active")) return;
 
   UploadVideo.querySelector("audio").src = currentAudio;
@@ -1395,6 +1399,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
