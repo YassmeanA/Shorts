@@ -269,7 +269,6 @@ Input.addEventListener("input", () => {
    Input.style.height = Math.min(Input.scrollHeight, 80) + "px";
    Footer.style.height=`${Input.offsetHeight + 20}px`;
    if(Input.offsetHeight >= 80){Input.style.border="10px solid #272727";}else{Input.style.border="none";};
-   SP = document.querySelector(".comments-container").scrollTop;
  comment = Input.value;
 });
 
@@ -676,6 +675,7 @@ Enter.addEventListener("click", () => {
     Input.style.border="none";
     Footer.style.height = "55px"; 
     if (comment && comment.trim() !== "" && currentVideoIndex !== null) {
+      SP = document.querySelector(".comments-container").scrollTop;
         const newComment = {
             avatar: Profile.src,
             username: Username.innerHTML,
@@ -693,14 +693,15 @@ Enter.addEventListener("click", () => {
         Input.value = "";
         comment = "";
         empty();
+        document.querySelector(".comments-container").scrollTop = SP;
     }
-   document.querySelector(".comments-container").scrollTop = SP;
+  
 });
 
 remove.addEventListener("click", () => {
 
 if (currentVideoIndex !== null && x !== undefined) {        
-
+SP = document.querySelector(".comments-container").scrollTop;
 setTimeout(() => {
 
        // Remove the comment from the array
@@ -714,8 +715,9 @@ setTimeout(() => {
        document.querySelectorAll(".video-carousel .video-slide")[currentVideoIndex].querySelector(".Icon.Comment span").innerHTML = videoData[currentVideoIndex].length;
 
       empty();
-      
+      document.querySelector(".comments-container").scrollTop = SP;
    }, 500);
+  
   }
 });
 
@@ -737,7 +739,7 @@ setTimeout(() => {
      Input.style.height = "35px";
      Input.style.border = "none";
      Footer.style.height = "55px";
-     
+     SP = document.querySelector(".comments-container").scrollTop;
      // Remove the old comment temporarily
      videoData[currentVideoIndex].splice(x, 1);
 
@@ -770,6 +772,8 @@ setTimeout(() => {
       // Restore Enter button behavior
       Enter.onclick = defaultEnterHandler;
        }
+
+       document.querySelector(".comments-container").scrollTop = SP;
      };
    }
 
@@ -1397,6 +1401,7 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
+
 
 
 
