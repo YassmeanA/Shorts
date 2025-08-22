@@ -33,7 +33,7 @@ justify-content:center;
 background:#0F0F0F;
 overflow:hidden;}
 
-.Body::-webkit-scrollbar, .page::-webkit-scrollbar, .comments-container::-webkit-scrollbar, .account-settings::-webkit-scrollbar, .input::-webkit-scrollbar, .UploadAudio::-webkit-scrollbar, .UploadVideo::-webkit-scrollbar {
+.Body::-webkit-scrollbar, .page::-webkit-scrollbar, .comments-container::-webkit-scrollbar, .account-settings::-webkit-scrollbar, .input::-webkit-scrollbar, .UploadAudio::-webkit-scrollbar, .UploadCover::-webkit-scrollbar {
 display:flex;
 background:none;
 width:10px;}
@@ -1466,7 +1466,10 @@ width:400px;}
 
 @media screen and (max-height:520px) {
 
-.UploadAudio .upload-content, .UploadCover .upload-content {
+.UploadAudio .upload-content {
+height:100%;}
+
+.UploadAudio.expand .upload-content, .UploadCover .upload-content {
 height:520px;}
     
 .UploadAudio, .UploadCover {
@@ -1476,7 +1479,7 @@ overflow-y:auto;}
 
 @media screen and (min-height:500px) {
 
-.UploadAudio .upload-content, .UploadCover .upload-content {
+.UploadAudio .upload-content, .UploadAudio.expand .upload-content, .UploadCover .upload-content {
 height:100%;}
     
 .UploadAudio, .UploadCover {
