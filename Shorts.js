@@ -1215,8 +1215,8 @@ Finish.style.pointerEvents="none";
 <source src="${uploadedAudio}" type="audio/mp3"/>
 </audio>
 <ul class="Icons">
-<li class="Icon"><div class="circle"></div><img src="like.svg" class="like"><img src="likeFilled.svg" class="like-filled"><span class="numA">0</span></li>
-<li class="Icon"><div class="circle"></div><img src="dislike.svg" class="dislike"><img src="dislikeFilled.svg" class="dislike-filled"><span class="numB">0</span></li>
+<li class="Icon"><div class="circle"></div><img src="like.svg" class="like" draggable="false"><img src="likeFilled.svg" class="like-filled"><span class="numA">0</span></li>
+<li class="Icon"><div class="circle"></div><img src="dislike.svg" class="dislike" draggable="false"><img src="dislikeFilled.svg" class="dislike-filled"><span class="numB">0</span></li>
 <li class="Icon Comment"><div class="circle"></div><img src="comments.svg"><span>0</span></li>
 <li class="Icon Share"><div class="circle"></div><img src="share.svg"><span>0</span></li>
 </ul>
@@ -1401,21 +1401,4 @@ Save.style.display = "none"; // hide again
     }, 1500);
   }, 600);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
